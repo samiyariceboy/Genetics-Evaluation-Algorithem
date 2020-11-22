@@ -31,7 +31,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
             {
                 var parent = await _rouletteWeelSelection.HandleSelection(firstPopulation, GettingStarted.NumberOfParents);
 
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < GettingStarted.NumberOfParents /2; j++)
                 {
 
                 }

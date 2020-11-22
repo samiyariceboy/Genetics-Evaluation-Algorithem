@@ -35,7 +35,7 @@ namespace knapsackEvolutionALgorithm
             this.EarlyPopulationTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.NumberOfGenerationRepetitionsTextBox = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.ItemsTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.NumberOfParentsTextBox = new System.Windows.Forms.TextBox();
@@ -74,11 +74,12 @@ namespace knapsackEvolutionALgorithm
             this.EarlyPopulationTextBox.Name = "EarlyPopulationTextBox";
             this.EarlyPopulationTextBox.Size = new System.Drawing.Size(125, 27);
             this.EarlyPopulationTextBox.TabIndex = 2;
+            this.EarlyPopulationTextBox.TextChanged += new System.EventHandler(this.EarlyPopulationTextBox_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(407, 62);
+            this.label3.Location = new System.Drawing.Point(407, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 20);
             this.label3.TabIndex = 5;
@@ -86,23 +87,23 @@ namespace knapsackEvolutionALgorithm
             // 
             // NumberOfGenerationRepetitionsTextBox
             // 
-            this.NumberOfGenerationRepetitionsTextBox.Location = new System.Drawing.Point(267, 59);
+            this.NumberOfGenerationRepetitionsTextBox.Location = new System.Drawing.Point(267, 57);
             this.NumberOfGenerationRepetitionsTextBox.Name = "NumberOfGenerationRepetitionsTextBox";
             this.NumberOfGenerationRepetitionsTextBox.Size = new System.Drawing.Size(125, 27);
             this.NumberOfGenerationRepetitionsTextBox.TabIndex = 4;
             // 
-            // richTextBox1
+            // ItemsTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 117);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(246, 311);
-            this.richTextBox1.TabIndex = 6;
-            this.richTextBox1.Text = "";
+            this.ItemsTextBox1.Location = new System.Drawing.Point(12, 117);
+            this.ItemsTextBox1.Name = "ItemsTextBox1";
+            this.ItemsTextBox1.Size = new System.Drawing.Size(246, 311);
+            this.ItemsTextBox1.TabIndex = 6;
+            this.ItemsTextBox1.Text = "";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 94);
+            this.label4.Location = new System.Drawing.Point(12, 93);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 20);
             this.label4.TabIndex = 7;
@@ -145,7 +146,7 @@ namespace knapsackEvolutionALgorithm
             this.Controls.Add(this.label5);
             this.Controls.Add(this.NumberOfParentsTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.ItemsTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.NumberOfGenerationRepetitionsTextBox);
             this.Controls.Add(this.label2);
@@ -168,7 +169,7 @@ namespace knapsackEvolutionALgorithm
         private System.Windows.Forms.TextBox EarlyPopulationTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox NumberOfGenerationRepetitionsTextBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox ItemsTextBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox NumberOfParentsTextBox;

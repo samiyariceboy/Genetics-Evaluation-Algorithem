@@ -1,6 +1,7 @@
-﻿using knapsackEvolutionALgorithm.Service.Entities;
+﻿using knapsackEvolutionALgorithm.Service.Common;
+using knapsackEvolutionALgorithm.Service.Entities;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace knapsackEvolutionALgorithm
@@ -32,15 +33,22 @@ namespace knapsackEvolutionALgorithm
 
         }
 
-        private void Run_Click(object sender, EventArgs e)
+        private async void Run_Click(object sender, EventArgs e)
         {
-            var common = new GettingStarted(
+            var gettingStarted = new GettingStarted(
                     int.Parse(CapacityTextBox.Text),
                     int.Parse(EarlyPopulationTextBox.Text),
                     int.Parse(NumberOfParentsTextBox.Text),
                     int.Parse(NumberOfGenerationRepetitionsTextBox.Text),
-                    new List<Item>()
-                );
+                    ItemsTextBox1.Text.ConvertToItemList()
+             );
+            var evaluationTrain = new EvaluationTrain(gettingStarted);
+            await evaluationTrain.DoTrain();
+        }
+
+        private void EarlyPopulationTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

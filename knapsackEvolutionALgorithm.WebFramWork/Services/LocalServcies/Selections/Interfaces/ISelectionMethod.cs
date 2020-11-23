@@ -1,6 +1,4 @@
-﻿using knapsackEvolutionALgorithm.Service.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces
 {

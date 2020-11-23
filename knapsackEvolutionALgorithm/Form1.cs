@@ -10,6 +10,7 @@ namespace knapsackEvolutionALgorithm
     public partial class Form1 : Form
     {
         private readonly System.Timers.Timer _timer;
+        private decimal _timeCount;
         public Form1()
         {
             InitializeComponent();
@@ -19,9 +20,17 @@ namespace knapsackEvolutionALgorithm
             _timer.Elapsed += Timer_Elapsed;
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            ExcutedTimeTextBox.Text = (int.Parse(ExcutedTimeTextBox.Text) + 1).ToString();
+            _timeCount = int.Parse(ExcutedTimeTextBox.Text);
+            _timeCount++;
+            if(ExcutedTimeTextBox.InvokeRequired)
+            {
+                ExcutedTimeTextBox.Invoke(new MethodInvoker(delegate 
+                {
+                    ExcutedTimeTextBox.Text = _timeCount.ToString();
+                }));
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -57,10 +66,12 @@ namespace knapsackEvolutionALgorithm
              );
             var evaluationTrain = new EvaluationTrain(gettingStarted);
             _timer.Start();
+            Run.Enabled = false;
             await evaluationTrain.DoTrain();
             _timer.Stop();
-
             MessageBox.Show($"Fitness: {evaluationTrain.ExcetedFitness}\n");
+            ExcutedTimeTextBox.Text = "0";
+            Run.Enabled = true;
         }
 
         private void EarlyPopulationTextBox_TextChanged(object sender, EventArgs e)

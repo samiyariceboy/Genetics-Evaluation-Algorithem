@@ -1,11 +1,8 @@
 ﻿using knapsackEvolutionALgorithm.Service.Common.Utilities;
 using knapsackEvolutionALgorithm.Service.Entities;
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.Interfaces;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
 {
     public class SimpleMutation : IMutationMethod<Individual, Individual>

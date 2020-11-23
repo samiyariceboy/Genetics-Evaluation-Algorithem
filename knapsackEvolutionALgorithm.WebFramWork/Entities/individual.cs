@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace knapsackEvolutionALgorithm.Service.Entities
@@ -28,7 +29,7 @@ namespace knapsackEvolutionALgorithm.Service.Entities
         /// <param name="generate">پاسخ تصادفی 0 و 1</param>
         /// <param name="items">اشیا</param>
         /// <param name="knapsakCapacity">ظرفیت کوله پشتی</param>
-        public Individual(bool[] generate, IList<Item> items, int knapsakCapacity)
+        public Individual(bool[] generate, IList<Item> items, int knapsackCapacity)
         {
             Generate = generate;
             var value = 0;
@@ -39,7 +40,7 @@ namespace knapsackEvolutionALgorithm.Service.Entities
                 value += generate[i].Equals(true) ? items[i].Value : 0;
                 weight += generate[i].Equals(true) ? items[i].Weight : 0;
             }
-            Fitness = weight <= knapsakCapacity ? value : 0;
+            Fitness = weight <= knapsackCapacity ? value : 0;
         }
         #endregion
     }

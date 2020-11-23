@@ -45,6 +45,16 @@ namespace knapsackEvolutionALgorithm
             ExcutedTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
+            // ExcutedTimeLabel
+            // 
+            ExcutedTimeLabel.AutoSize = true;
+            ExcutedTimeLabel.Location = new System.Drawing.Point(606, 402);
+            ExcutedTimeLabel.Name = "ExcutedTimeLabel";
+            ExcutedTimeLabel.Size = new System.Drawing.Size(37, 20);
+            ExcutedTimeLabel.TabIndex = 12;
+            ExcutedTimeLabel.Text = "زمان";
+            ExcutedTimeLabel.Click += new System.EventHandler(this.ExcutedTimeTextBox_Click);
+            // 
             // CapacityTextBox
             // 
             this.CapacityTextBox.Location = new System.Drawing.Point(4, 4);
@@ -136,19 +146,9 @@ namespace knapsackEvolutionALgorithm
             this.Run.Name = "Run";
             this.Run.Size = new System.Drawing.Size(94, 29);
             this.Run.TabIndex = 10;
-            this.Run.Text = "RUN";
+            this.Run.Text = "Train";
             this.Run.UseVisualStyleBackColor = true;
             this.Run.Click += new System.EventHandler(this.Run_Click);
-            // 
-            // ExcutedTimeLabel
-            // 
-            ExcutedTimeLabel.AutoSize = true;
-            ExcutedTimeLabel.Location = new System.Drawing.Point(606, 402);
-            ExcutedTimeLabel.Name = "ExcutedTimeLabel";
-            ExcutedTimeLabel.Size = new System.Drawing.Size(37, 20);
-            ExcutedTimeLabel.TabIndex = 12;
-            ExcutedTimeLabel.Text = "زمان";
-            ExcutedTimeLabel.Click += new System.EventHandler(this.ExcutedTimeTextBox_Click);
             // 
             // ExcutedTimeTextBox
             // 
@@ -176,6 +176,8 @@ namespace knapsackEvolutionALgorithm
             this.Controls.Add(this.EarlyPopulationTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CapacityTextBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Knapsack";
             this.Load += new System.EventHandler(this.Form1_Load);

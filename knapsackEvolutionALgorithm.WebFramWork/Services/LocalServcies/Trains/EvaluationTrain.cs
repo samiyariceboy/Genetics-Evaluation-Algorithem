@@ -2,7 +2,6 @@
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations;
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 {
@@ -37,29 +36,32 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 
             var firstPopulation = await _randomSelection.HandleSelection(GettingStarted.Items, GettingStarted.KnapsakCapacity);
             var maximumChild = new Individual(GettingStarted.Items);
-            for (int i = 0; i < GettingStarted.NumberOfGenerationRepetitions; i++)
+            await Task.Run(() => 
             {
-                var parent = await _rouletteWeelSelection.HandleSelection(firstPopulation, GettingStarted.NumberOfParents);
-                /// ایجاد یک رولت ویل بر روی جمعیت اولیه
-                firstPopulation = await _rouletteWeelSelection.HandleSelection(parent, GettingStarted.NumberOfParents);
-
-                for (int j = 0; j < GettingStarted.NumberOfParents / 2; j++)
+                for (int i = 0; i < GettingStarted.NumberOfGenerationRepetitions; i++)
                 {
-                    if (firstPopulation[j].Fitness > maximumChild.Fitness)
-                        maximumChild = firstPopulation[j];
-                    if(firstPopulation[j + 1].Fitness > maximumChild.Fitness)
-                        maximumChild = firstPopulation[j + 1];
-                    var childs = await _crossOver.HandleRecombination(firstPopulation[j], firstPopulation[j+1]);
+                    var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, GettingStarted.NumberOfParents).Result;
+                    /// ایجاد یک رولت ویل بر روی جمعیت اولیه
+                    firstPopulation = _rouletteWeelSelection.HandleSelection(parent, GettingStarted.NumberOfParents).Result;
 
-                    firstPopulation.Add(childs.first);
-                    if (childs.first.Fitness > maximumChild.Fitness)
-                        maximumChild = childs.first;
+                    for (int j = 0; j < GettingStarted.NumberOfParents ; j++)
+                    {
+                        if (firstPopulation[j].Fitness > maximumChild.Fitness)
+                            maximumChild = firstPopulation[j];
+                        if (firstPopulation[j + 1].Fitness > maximumChild.Fitness)
+                            maximumChild = firstPopulation[j + 1];
+                        var childs = _crossOver.HandleRecombination(firstPopulation[j], firstPopulation[j + 1]).Result;
 
-                    firstPopulation.Add(childs.second);
-                    if (childs.second.Fitness > maximumChild.Fitness)
-                        maximumChild = childs.second;
+                        firstPopulation.Add(childs.first);
+                        if (childs.first.Fitness > maximumChild.Fitness)
+                            maximumChild = childs.first;
+
+                        firstPopulation.Add(childs.second);
+                        if (childs.second.Fitness > maximumChild.Fitness)
+                            maximumChild = childs.second;
+                    }
                 }
-            }
+            });
             ExcetedFitness = maximumChild.Fitness;
         }
 

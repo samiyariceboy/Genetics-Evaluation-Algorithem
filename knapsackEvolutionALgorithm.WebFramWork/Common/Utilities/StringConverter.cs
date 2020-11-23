@@ -14,7 +14,7 @@ namespace knapsackEvolutionALgorithm.Service.Common
             {
                 var item = inputArray[i].Split(',');
                 ItemList.Add(
-                        new Item(int.Parse(item[i]), int.Parse(item[i]))
+                        new Item(int.Parse(item[0]), int.Parse(item[1]))
                     );
             }
             return ItemList;

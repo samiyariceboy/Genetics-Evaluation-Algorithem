@@ -10,6 +10,11 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
         : ISelectionMethod<IList<Individual>,
             IList<Individual>>
     {
+        public void Dispose()
+        {
+            Dispose();
+        }
+
         public async Task<IList<Individual>> HandleSelection(IList<Individual> SelectionBoxs, int capacity)
         {
             var totalRoulet = 0;

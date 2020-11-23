@@ -42,13 +42,15 @@ namespace knapsackEvolutionALgorithm
             this.NumberOfParentsTextBox = new System.Windows.Forms.TextBox();
             this.Run = new System.Windows.Forms.Button();
             this.ExcutedTimeTextBox = new System.Windows.Forms.TextBox();
+            this.maximumChildsTextBox = new System.Windows.Forms.RichTextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ExcutedTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ExcutedTimeLabel
             // 
             ExcutedTimeLabel.AutoSize = true;
-            ExcutedTimeLabel.Location = new System.Drawing.Point(606, 402);
+            ExcutedTimeLabel.Location = new System.Drawing.Point(254, 395);
             ExcutedTimeLabel.Name = "ExcutedTimeLabel";
             ExcutedTimeLabel.Size = new System.Drawing.Size(37, 20);
             ExcutedTimeLabel.TabIndex = 12;
@@ -109,7 +111,7 @@ namespace knapsackEvolutionALgorithm
             // 
             this.ItemsTextBox1.Location = new System.Drawing.Point(12, 117);
             this.ItemsTextBox1.Name = "ItemsTextBox1";
-            this.ItemsTextBox1.Size = new System.Drawing.Size(246, 311);
+            this.ItemsTextBox1.Size = new System.Drawing.Size(117, 311);
             this.ItemsTextBox1.TabIndex = 6;
             this.ItemsTextBox1.Text = "";
             // 
@@ -142,7 +144,7 @@ namespace knapsackEvolutionALgorithm
             // 
             // Run
             // 
-            this.Run.Location = new System.Drawing.Point(284, 399);
+            this.Run.Location = new System.Drawing.Point(135, 393);
             this.Run.Name = "Run";
             this.Run.Size = new System.Drawing.Size(94, 29);
             this.Run.TabIndex = 10;
@@ -152,17 +154,37 @@ namespace knapsackEvolutionALgorithm
             // 
             // ExcutedTimeTextBox
             // 
-            this.ExcutedTimeTextBox.Location = new System.Drawing.Point(663, 399);
+            this.ExcutedTimeTextBox.Location = new System.Drawing.Point(297, 395);
             this.ExcutedTimeTextBox.Name = "ExcutedTimeTextBox";
-            this.ExcutedTimeTextBox.Size = new System.Drawing.Size(125, 27);
+            this.ExcutedTimeTextBox.Size = new System.Drawing.Size(70, 27);
             this.ExcutedTimeTextBox.TabIndex = 13;
             this.ExcutedTimeTextBox.Text = "0";
+            // 
+            // maximumChildsTextBox
+            // 
+            this.maximumChildsTextBox.Location = new System.Drawing.Point(135, 129);
+            this.maximumChildsTextBox.Name = "maximumChildsTextBox";
+            this.maximumChildsTextBox.Size = new System.Drawing.Size(379, 258);
+            this.maximumChildsTextBox.TabIndex = 14;
+            this.maximumChildsTextBox.Text = "";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(267, 106);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 20);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "maximumChilds";
+            this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(527, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.maximumChildsTextBox);
             this.Controls.Add(this.ExcutedTimeTextBox);
             this.Controls.Add(ExcutedTimeLabel);
             this.Controls.Add(this.Run);
@@ -200,6 +222,8 @@ namespace knapsackEvolutionALgorithm
         private System.Windows.Forms.TextBox NumberOfParentsTextBox;
         private System.Windows.Forms.Button Run;
         private System.Windows.Forms.TextBox ExcutedTimeTextBox;
+        private System.Windows.Forms.RichTextBox maximumChildsTextBox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

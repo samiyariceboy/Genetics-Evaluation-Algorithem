@@ -16,7 +16,7 @@ namespace knapsackEvolutionALgorithm
             InitializeComponent();
 
             _timer = new System.Timers.Timer();
-            _timer.Interval = 100;
+            _timer.Interval = 10;
             _timer.Elapsed += Timer_Elapsed;
         }
 
@@ -55,6 +55,7 @@ namespace knapsackEvolutionALgorithm
 
         private async void Run_Click(object sender, EventArgs e)
         {
+            maximumChildsTextBox.Text = "";
             if (Validation())
             { MessageBox.Show("تمامی آیتم های ورودی رو وارد کنید", "", MessageBoxButtons.OK); return; }
             var gettingStarted = new GettingStarted(
@@ -65,6 +66,8 @@ namespace knapsackEvolutionALgorithm
                     ItemsTextBox1.Text.ConvertToItemList()
              );
             var evaluationTrain = new EvaluationTrain(gettingStarted);
+            evaluationTrain.MaximumChildChanged += EvaluationTrain_MaximumChildChanged;
+
             _timer.Start();
             Run.Enabled = false;
             await evaluationTrain.DoTrain();
@@ -72,6 +75,17 @@ namespace knapsackEvolutionALgorithm
             MessageBox.Show($"Fitness: {evaluationTrain.ExcetedFitness}\n");
             ExcutedTimeTextBox.Text = "0";
             Run.Enabled = true;
+        }
+
+        private void EvaluationTrain_MaximumChildChanged(Individual maximumChild, int Try)
+        {
+            if (maximumChildsTextBox.InvokeRequired)
+            {
+                maximumChildsTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    maximumChildsTextBox.Text += $"\nChoose Fitness: {maximumChild.Fitness}  try: {Try}";
+                }));
+            }
         }
 
         private void EarlyPopulationTextBox_TextChanged(object sender, EventArgs e)
@@ -97,6 +111,11 @@ namespace knapsackEvolutionALgorithm
                 || ItemsTextBox1.Text == "")
                 return true;
             return false;
+        }
+
+        private void label6_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

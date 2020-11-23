@@ -6,6 +6,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
     public interface ITrain
     {
         public GettingStarted GettingStarted { get; init; }
+        public int ExcetedFitness { get; set; }
         Task DoTrain();
     }
 }

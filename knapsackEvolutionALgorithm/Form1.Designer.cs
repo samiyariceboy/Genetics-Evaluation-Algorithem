@@ -29,6 +29,7 @@ namespace knapsackEvolutionALgorithm
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Label ExcutedTimeLabel;
             this.CapacityTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@ namespace knapsackEvolutionALgorithm
             this.label5 = new System.Windows.Forms.Label();
             this.NumberOfParentsTextBox = new System.Windows.Forms.TextBox();
             this.Run = new System.Windows.Forms.Button();
+            this.ExcutedTimeTextBox = new System.Windows.Forms.TextBox();
+            ExcutedTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CapacityTextBox
@@ -137,11 +140,31 @@ namespace knapsackEvolutionALgorithm
             this.Run.UseVisualStyleBackColor = true;
             this.Run.Click += new System.EventHandler(this.Run_Click);
             // 
+            // ExcutedTimeLabel
+            // 
+            ExcutedTimeLabel.AutoSize = true;
+            ExcutedTimeLabel.Location = new System.Drawing.Point(606, 402);
+            ExcutedTimeLabel.Name = "ExcutedTimeLabel";
+            ExcutedTimeLabel.Size = new System.Drawing.Size(37, 20);
+            ExcutedTimeLabel.TabIndex = 12;
+            ExcutedTimeLabel.Text = "زمان";
+            ExcutedTimeLabel.Click += new System.EventHandler(this.ExcutedTimeTextBox_Click);
+            // 
+            // ExcutedTimeTextBox
+            // 
+            this.ExcutedTimeTextBox.Location = new System.Drawing.Point(663, 399);
+            this.ExcutedTimeTextBox.Name = "ExcutedTimeTextBox";
+            this.ExcutedTimeTextBox.Size = new System.Drawing.Size(125, 27);
+            this.ExcutedTimeTextBox.TabIndex = 13;
+            this.ExcutedTimeTextBox.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ExcutedTimeTextBox);
+            this.Controls.Add(ExcutedTimeLabel);
             this.Controls.Add(this.Run);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.NumberOfParentsTextBox);
@@ -174,6 +197,7 @@ namespace knapsackEvolutionALgorithm
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox NumberOfParentsTextBox;
         private System.Windows.Forms.Button Run;
+        private System.Windows.Forms.TextBox ExcutedTimeTextBox;
     }
 }
 

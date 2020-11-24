@@ -10,6 +10,8 @@ namespace knapsackEvolutionALgorithm
     public partial class Form1 : Form
     {
         private readonly System.Timers.Timer _timer;
+        private GettingStarted gettingStarted;
+
         private decimal _timeCount;
         public Form1()
         {
@@ -56,9 +58,10 @@ namespace knapsackEvolutionALgorithm
         private async void Run_Click(object sender, EventArgs e)
         {
             maximumChildsTextBox.Text = "";
+            ExcutedTimeTextBox.Text = "0";
             if (Validation())
             { MessageBox.Show("تمامی آیتم های ورودی رو وارد کنید", "", MessageBoxButtons.OK); return; }
-            var gettingStarted = new GettingStarted(
+            gettingStarted = new GettingStarted(
                     int.Parse(CapacityTextBox.Text),
                     int.Parse(EarlyPopulationTextBox.Text),
                     int.Parse(NumberOfParentsTextBox.Text),
@@ -67,14 +70,37 @@ namespace knapsackEvolutionALgorithm
              );
             var evaluationTrain = new EvaluationTrain(gettingStarted);
             evaluationTrain.MaximumChildChanged += EvaluationTrain_MaximumChildChanged;
+            evaluationTrain.TryChanged += EvaluationTrain_TryChanged;
+            evaluationTrain.ParentChanged += EvaluationTrain_ParentChanged;
 
             _timer.Start();
             Run.Enabled = false;
             await evaluationTrain.DoTrain();
             _timer.Stop();
-            MessageBox.Show($"Fitness: {evaluationTrain.ExcetedFitness}\n");
-            ExcutedTimeTextBox.Text = "0";
+            MessageBox.Show($"Fitness: {evaluationTrain.ExcetedFitness}\nTime: {_timeCount/100}s");
             Run.Enabled = true;
+        }
+
+        private void EvaluationTrain_ParentChanged(int changed)
+        {
+            if (ParentChangedTextBox.InvokeRequired)
+            {
+                ParentChangedTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    ParentChangedTextBox.Text = (changed+1).ToString();
+                }));
+            }
+        }
+
+        private void EvaluationTrain_TryChanged(int changed)
+        {
+            if (GenerateChangedTextBox.InvokeRequired)
+            {
+                GenerateChangedTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    GenerateChangedTextBox.Text = (changed+1).ToString();
+                }));
+            }
         }
 
         private void EvaluationTrain_MaximumChildChanged(Individual maximumChild, int parent, int Try)
@@ -114,6 +140,11 @@ namespace knapsackEvolutionALgorithm
         }
 
         private void label6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

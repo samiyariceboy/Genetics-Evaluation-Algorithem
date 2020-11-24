@@ -17,7 +17,8 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
         }
         public Individual HandleMutation(Individual input)
         {
-            int point = RandomHelper.CreateRandom(input.Generate.Count());
+            //Choose one point from chromosome
+            var point = RandomHelper.CreateRandom(input.Generate.Count());
             input.Generate[point] = (input.Generate[point].Equals(true)) ? false : true;
             return new Individual(input.Generate, _items, _knapsackCapacity);
         }

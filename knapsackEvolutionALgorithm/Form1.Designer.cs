@@ -30,6 +30,8 @@ namespace knapsackEvolutionALgorithm
         private void InitializeComponent()
         {
             System.Windows.Forms.Label ExcutedTimeLabel;
+            System.Windows.Forms.Label Generate;
+            System.Windows.Forms.Label label7;
             this.CapacityTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,13 +46,17 @@ namespace knapsackEvolutionALgorithm
             this.ExcutedTimeTextBox = new System.Windows.Forms.TextBox();
             this.maximumChildsTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.GenerateChangedTextBox = new System.Windows.Forms.TextBox();
+            this.ParentChangedTextBox = new System.Windows.Forms.TextBox();
             ExcutedTimeLabel = new System.Windows.Forms.Label();
+            Generate = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ExcutedTimeLabel
             // 
             ExcutedTimeLabel.AutoSize = true;
-            ExcutedTimeLabel.Location = new System.Drawing.Point(254, 395);
+            ExcutedTimeLabel.Location = new System.Drawing.Point(421, 396);
             ExcutedTimeLabel.Name = "ExcutedTimeLabel";
             ExcutedTimeLabel.Size = new System.Drawing.Size(37, 20);
             ExcutedTimeLabel.TabIndex = 12;
@@ -154,7 +160,7 @@ namespace knapsackEvolutionALgorithm
             // 
             // ExcutedTimeTextBox
             // 
-            this.ExcutedTimeTextBox.Location = new System.Drawing.Point(297, 395);
+            this.ExcutedTimeTextBox.Location = new System.Drawing.Point(461, 396);
             this.ExcutedTimeTextBox.Name = "ExcutedTimeTextBox";
             this.ExcutedTimeTextBox.Size = new System.Drawing.Size(70, 27);
             this.ExcutedTimeTextBox.TabIndex = 13;
@@ -162,27 +168,67 @@ namespace knapsackEvolutionALgorithm
             // 
             // maximumChildsTextBox
             // 
-            this.maximumChildsTextBox.Location = new System.Drawing.Point(135, 129);
+            this.maximumChildsTextBox.Location = new System.Drawing.Point(135, 127);
             this.maximumChildsTextBox.Name = "maximumChildsTextBox";
-            this.maximumChildsTextBox.Size = new System.Drawing.Size(379, 258);
+            this.maximumChildsTextBox.Size = new System.Drawing.Size(379, 260);
             this.maximumChildsTextBox.TabIndex = 14;
             this.maximumChildsTextBox.Text = "";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(267, 106);
+            this.label6.Location = new System.Drawing.Point(267, 104);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(115, 20);
             this.label6.TabIndex = 15;
             this.label6.Text = "maximumChilds";
             this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
+            // GenerateChangedTextBox
+            // 
+            this.GenerateChangedTextBox.Location = new System.Drawing.Point(284, 397);
+            this.GenerateChangedTextBox.Name = "GenerateChangedTextBox";
+            this.GenerateChangedTextBox.Size = new System.Drawing.Size(42, 27);
+            this.GenerateChangedTextBox.TabIndex = 16;
+            this.GenerateChangedTextBox.Text = "0";
+            // 
+            // Generate
+            // 
+            Generate.AutoSize = true;
+            Generate.Location = new System.Drawing.Point(247, 399);
+            Generate.Name = "Generate";
+            Generate.Size = new System.Drawing.Size(37, 20);
+            Generate.TabIndex = 17;
+            Generate.Text = "نسل";
+            Generate.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(330, 399);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(34, 20);
+            label7.TabIndex = 19;
+            label7.Text = "والد";
+            // 
+            // ParentChangedTextBox
+            // 
+            this.ParentChangedTextBox.Location = new System.Drawing.Point(367, 397);
+            this.ParentChangedTextBox.Name = "ParentChangedTextBox";
+            this.ParentChangedTextBox.Size = new System.Drawing.Size(42, 27);
+            this.ParentChangedTextBox.TabIndex = 18;
+            this.ParentChangedTextBox.Text = "0";
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 450);
+            this.ClientSize = new System.Drawing.Size(547, 437);
+            this.Controls.Add(label7);
+            this.Controls.Add(this.ParentChangedTextBox);
+            this.Controls.Add(Generate);
+            this.Controls.Add(this.GenerateChangedTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.maximumChildsTextBox);
             this.Controls.Add(this.ExcutedTimeTextBox);
@@ -224,6 +270,8 @@ namespace knapsackEvolutionALgorithm
         private System.Windows.Forms.TextBox ExcutedTimeTextBox;
         private System.Windows.Forms.RichTextBox maximumChildsTextBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox GenerateChangedTextBox;
+        private System.Windows.Forms.TextBox ParentChangedTextBox;
     }
 }
 

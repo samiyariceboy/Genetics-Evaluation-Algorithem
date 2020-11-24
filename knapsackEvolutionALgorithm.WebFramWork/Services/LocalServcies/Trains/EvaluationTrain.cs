@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 {
-    public delegate void Notification(Individual maximumChild, int parent, int Try);
+    public delegate void ChangeNotification(Individual maximumChild, int parent, int Try);
+    public delegate void Notification(int changed);
     public class EvaluationTrain : ITrain
     {
         public GettingStarted GettingStarted { get; init; }
 
-        public event Notification MaximumChildChanged;
+        public event ChangeNotification MaximumChildChanged;
+        public event Notification TryChanged;
+        public event Notification ParentChanged;
 
         public int ExcetedFitness { get; set; }
 
@@ -43,24 +46,30 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
             {
                 for (int i = 0; i < GettingStarted.NumberOfGenerationRepetitions; i++)
                 {
+                    TryChanged.Invoke(i);
                     var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, GettingStarted.NumberOfParents).Result;
                     //فاصله گرفتن از  
                     firstPopulation = _rouletteWeelSelection.HandleSelection(parent, GettingStarted.NumberOfParents).Result;
 
                     for (int j = 0; j < GettingStarted.NumberOfParents ; j++)
                     {
+                        ParentChanged.Invoke(j);
                         if (firstPopulation[j].Fitness > maximumChild.Fitness)
                         {
                             maximumChild = firstPopulation[j];
+
+                            //Send Notification
                             MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
                         if (firstPopulation[j + 1].Fitness > maximumChild.Fitness)
                         {
                             maximumChild = firstPopulation[j + 1];
+
+                            //Send Notification
                             MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
 
-                        //Recombination 
+                        //Recombination between two chromosomes together
                         var childs = _crossOver.HandleRecombination(firstPopulation[j], firstPopulation[j + 1]).Result;
 
                         /// میو + لاندا
@@ -68,6 +77,8 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                         if (childs.first.Fitness > maximumChild.Fitness)
                         {
                             maximumChild = childs.first;
+
+                            //Send Notification
                             MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
 
@@ -75,6 +86,8 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                         if (childs.second.Fitness > maximumChild.Fitness)
                         {
                             maximumChild = childs.second;
+
+                            //Send Notification
                             MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
                     }

@@ -63,6 +63,25 @@ namespace knapsackEvolutionALgorithm
             ExcutedTimeLabel.Text = "زمان";
             ExcutedTimeLabel.Click += new System.EventHandler(this.ExcutedTimeTextBox_Click);
             // 
+            // Generate
+            // 
+            Generate.AutoSize = true;
+            Generate.Location = new System.Drawing.Point(247, 399);
+            Generate.Name = "Generate";
+            Generate.Size = new System.Drawing.Size(37, 20);
+            Generate.TabIndex = 17;
+            Generate.Text = "نسل";
+            Generate.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(330, 399);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(34, 20);
+            label7.TabIndex = 19;
+            label7.Text = "والد";
+            // 
             // CapacityTextBox
             // 
             this.CapacityTextBox.Location = new System.Drawing.Point(4, 4);
@@ -170,7 +189,7 @@ namespace knapsackEvolutionALgorithm
             // 
             this.maximumChildsTextBox.Location = new System.Drawing.Point(135, 127);
             this.maximumChildsTextBox.Name = "maximumChildsTextBox";
-            this.maximumChildsTextBox.Size = new System.Drawing.Size(379, 260);
+            this.maximumChildsTextBox.Size = new System.Drawing.Size(400, 260);
             this.maximumChildsTextBox.TabIndex = 14;
             this.maximumChildsTextBox.Text = "";
             // 
@@ -191,25 +210,6 @@ namespace knapsackEvolutionALgorithm
             this.GenerateChangedTextBox.Size = new System.Drawing.Size(42, 27);
             this.GenerateChangedTextBox.TabIndex = 16;
             this.GenerateChangedTextBox.Text = "0";
-            // 
-            // Generate
-            // 
-            Generate.AutoSize = true;
-            Generate.Location = new System.Drawing.Point(247, 399);
-            Generate.Name = "Generate";
-            Generate.Size = new System.Drawing.Size(37, 20);
-            Generate.TabIndex = 17;
-            Generate.Text = "نسل";
-            Generate.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(330, 399);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(34, 20);
-            label7.TabIndex = 19;
-            label7.Text = "والد";
             // 
             // ParentChangedTextBox
             // 

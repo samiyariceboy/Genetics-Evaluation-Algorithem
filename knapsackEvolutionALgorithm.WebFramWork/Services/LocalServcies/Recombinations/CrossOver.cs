@@ -50,9 +50,11 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinatio
             });
             var child1 = new Individual(child1Generate, _items, _knapsackCapacity);
             var child2 = new Individual(child2Generate, _items, _knapsackCapacity);
-            if (RandomHelper.CreateRandom(0, 100) < 30)
+            
+            //noise for mutation
+            if (RandomHelper.CreateRandom(0, 100) < 35)
                 child1 = _simpleMutation.HandleMutation(child1);
-            if (RandomHelper.CreateRandom(0, 100) < 30)
+            if (RandomHelper.CreateRandom(0, 100) < 35)
                 child2 = _simpleMutation.HandleMutation(child2);
             return (child1, child2);
         }

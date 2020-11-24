@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 {
-    public delegate void Notification(Individual maximumChild, int Try);
+    public delegate void Notification(Individual maximumChild, int parent, int Try);
     public class EvaluationTrain : ITrain
     {
         public GettingStarted GettingStarted { get; init; }
@@ -52,12 +52,12 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                         if (firstPopulation[j].Fitness > maximumChild.Fitness)
                         {
                             maximumChild = firstPopulation[j];
-                            MaximumChildChanged.Invoke(maximumChild, i);
+                            MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
                         if (firstPopulation[j + 1].Fitness > maximumChild.Fitness)
                         {
                             maximumChild = firstPopulation[j + 1];
-                            MaximumChildChanged.Invoke(maximumChild, i);
+                            MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
 
                         //Recombination 
@@ -68,14 +68,14 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                         if (childs.first.Fitness > maximumChild.Fitness)
                         {
                             maximumChild = childs.first;
-                            MaximumChildChanged.Invoke(maximumChild, i);
+                            MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
 
                         firstPopulation.Add(childs.second);
                         if (childs.second.Fitness > maximumChild.Fitness)
                         {
                             maximumChild = childs.second;
-                            MaximumChildChanged.Invoke(maximumChild, i);
+                            MaximumChildChanged.Invoke(maximumChild, j, i);
                         }
                     }
                 }

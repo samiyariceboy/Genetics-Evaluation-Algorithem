@@ -77,13 +77,13 @@ namespace knapsackEvolutionALgorithm
             Run.Enabled = true;
         }
 
-        private void EvaluationTrain_MaximumChildChanged(Individual maximumChild, int Try)
+        private void EvaluationTrain_MaximumChildChanged(Individual maximumChild, int parent, int Try)
         {
             if (maximumChildsTextBox.InvokeRequired)
             {
                 maximumChildsTextBox.Invoke(new MethodInvoker(delegate
                 {
-                    maximumChildsTextBox.Text += $"\nChoose Fitness: {maximumChild.Fitness}  try: {Try}";
+                    maximumChildsTextBox.Text += $"Choose Fitness: {maximumChild.Fitness} | parent: {parent} | try: {Try}\n";
                 }));
             }
         }

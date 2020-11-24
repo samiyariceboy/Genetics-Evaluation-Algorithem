@@ -1,22 +1,12 @@
-﻿using System;
+﻿using knapsackEvolutionALgorithm.Service.Entities.Common;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace knapsackEvolutionALgorithm.Service.Entities
 {
-    public class Individual
+    public class Individual : BaseChromosome
     {
-        #region Properties
-        public int Fitness { get; private set; }
-        public bool[] Generate { get; private set; }
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
         #region Ctors
-
         public Individual(IList<Item> items)
         {
             Generate = new bool[items.Count];

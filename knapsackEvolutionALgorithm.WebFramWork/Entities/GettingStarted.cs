@@ -2,21 +2,16 @@
 
 namespace knapsackEvolutionALgorithm.Service.Entities
 {
-    public record GettingStarted
+    public class GettingStarted : BaseGettingStarted
     {
         public GettingStarted(int knapsakCapacity, int earlyPopulation, int numberOfParents, int numberOfGenerationRepetitions, IList<Item> items)
+            : base(earlyPopulation, numberOfParents, numberOfGenerationRepetitions)
         {
             KnapsakCapacity = knapsakCapacity;
-            EarlyPopulation = earlyPopulation;
-            NumberOfParents = numberOfParents;
-            NumberOfGenerationRepetitions = numberOfGenerationRepetitions;
             Items = items;
         }
 
         public int KnapsakCapacity { get; init; }
-        public int EarlyPopulation { get; init; }
-        public int NumberOfParents { get; init; }
-        public int NumberOfGenerationRepetitions { get; init; }
         public IList<Item> Items { get; init; }
     }
 }   

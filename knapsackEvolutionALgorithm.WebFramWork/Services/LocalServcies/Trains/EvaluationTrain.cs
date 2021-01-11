@@ -7,10 +7,8 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 {
     public delegate void ChangeNotification(Individual maximumChild, int parent, int Try);
     public delegate void Notification(int changed);
-    public class EvaluationTrain : ITrain
+    public class EvaluationTrain : ITrain<GettingStarted, int>
     {
-        public GettingStarted GettingStarted { get; init; }
-
         public event ChangeNotification MaximumChildChanged;
         public event Notification TryChanged;
         public event Notification ParentChanged;
@@ -24,12 +22,9 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 
         public EvaluationTrain(GettingStarted gettingStarted)
         {
-             GettingStarted = gettingStarted;
-
             _randomSelection = new RandomSelection(gettingStarted.EarlyPopulation);
             _rouletteWeelSelection = new RouletteWeel2Selection();
             _crossOver = new CrossOver(gettingStarted.Items, gettingStarted.KnapsakCapacity);
-
         }
 
 
@@ -38,20 +33,20 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
         /// </summary>
         /// <returns></returns>
 
-        public async Task DoTrain()
+        public async Task DoTrain(GettingStarted gettingStarted)
         {
-            var firstPopulation = await _randomSelection.HandleSelection(GettingStarted.Items, GettingStarted.KnapsakCapacity);
-            var maximumChild = new Individual(GettingStarted.Items);
+            var firstPopulation = await _randomSelection.HandleSelection(gettingStarted.Items, gettingStarted.KnapsakCapacity);
+            var maximumChild = new Individual(gettingStarted.Items);
             await Task.Run(() => 
             {
-                for (int i = 0; i < GettingStarted.NumberOfGenerationRepetitions; i++)
+                for (int i = 0; i < gettingStarted.NumberOfGenerationRepetitions; i++)
                 {
                     TryChanged.Invoke(i);
-                    var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, GettingStarted.NumberOfParents).Result;
+                    var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, gettingStarted.NumberOfParents).Result;
                     //فاصله گرفتن از  
-                    firstPopulation = _rouletteWeelSelection.HandleSelection(parent, GettingStarted.NumberOfParents).Result;
+                    firstPopulation = _rouletteWeelSelection.HandleSelection(parent, gettingStarted.NumberOfParents).Result;
 
-                    for (int j = 0; j < GettingStarted.NumberOfParents ; j++)
+                    for (int j = 0; j < gettingStarted.NumberOfParents ; j++)
                     {
                         ParentChanged.Invoke(j);
                         if (firstPopulation[j].Fitness > maximumChild.Fitness)

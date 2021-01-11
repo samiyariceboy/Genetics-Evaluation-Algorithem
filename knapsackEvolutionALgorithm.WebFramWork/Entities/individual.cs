@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace knapsackEvolutionALgorithm.Service.Entities
 {
-    public class Individual : BaseChromosome
+    public class Individual : BaseChromosome<bool, int>
     {
         #region Ctors
         public Individual(IList<Item> items)

@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Common\StaticFiles\**" />
+    <EmbeddedResource Remove="Common\StaticFiles\**" />
+    <None Remove="Common\StaticFiles\**" />
+  </ItemGroup>
+
 </Project>

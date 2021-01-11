@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
 {
-    public interface ITrain
+    public interface ITrain<in TModelInput, TExcetedFitness>
+        where TModelInput : BaseGettingStarted
     {
-        public GettingStarted GettingStarted { get; init; }
-        public int ExcetedFitness { get; set; }
-        Task DoTrain();
+        public TExcetedFitness ExcetedFitness { get; set; }
+        Task DoTrain(TModelInput gettingStarted);
     }
 }

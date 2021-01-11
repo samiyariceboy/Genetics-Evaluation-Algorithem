@@ -139,6 +139,7 @@ namespace knapsackEvolutionALgorithm
             this.ItemsTextBox1.Size = new System.Drawing.Size(117, 311);
             this.ItemsTextBox1.TabIndex = 6;
             this.ItemsTextBox1.Text = "";
+            this.ItemsTextBox1.TextChanged += new System.EventHandler(this.ItemsTextBox1_TextChanged);
             // 
             // label4
             // 
@@ -192,6 +193,7 @@ namespace knapsackEvolutionALgorithm
             this.maximumChildsTextBox.Size = new System.Drawing.Size(400, 260);
             this.maximumChildsTextBox.TabIndex = 14;
             this.maximumChildsTextBox.Text = "";
+            this.maximumChildsTextBox.TextChanged += new System.EventHandler(this.maximumChildsTextBox_TextChanged);
             // 
             // label6
             // 

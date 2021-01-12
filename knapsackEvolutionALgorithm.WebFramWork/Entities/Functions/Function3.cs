@@ -15,10 +15,10 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
 
         
         #endregion
-        public double Implement(int nCount)
+        public double Implement(MinFuncIndividual individual, int nCount)
         {
             var s = 0.0;
-            for (int x = 0; x < nCount; x++)
+            foreach (var x in individual.Generate)
             {
                 if (x > 5.12 || x < -5.12)
                     s += (10 * Math.Pow(x, 2));
@@ -27,10 +27,11 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
             }
             return (10 * nCount) + s;
         }
-        public double ComputeFitness(int nCount)
+        public MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength)
         {
-            var implemt = Implement(nCount);
-            return implemt;
+            var result = Implement(individual, chromosomeLength);
+            individual.Fitness = result;
+            return individual;
         }
 
         public void LoadFunction()

@@ -9,6 +9,9 @@ namespace knapsackEvolutionALgorithm.Service.Entities
                 int earlyPopulation,
                 int numberOfParents,
                 int numberOfGenerationRepetitions,
+                int choromosemeLenght,
+                double sigma,
+                int kIndividualTornomantInit,
 
                 FunctionSelected functionSelected,
                 IList<Selection> selectionList,
@@ -16,11 +19,17 @@ namespace knapsackEvolutionALgorithm.Service.Entities
             ) 
             : base(earlyPopulation, numberOfParents, numberOfGenerationRepetitions)
         {
+            ChoromosemeLenght = choromosemeLenght;
+            Sigma = sigma;
+            KIndividualTornomantInit = kIndividualTornomantInit;
             FunctionSelected = functionSelected;
             SelectionList = selectionList;
             Strategies = strategies;
         }
 
+        public int ChoromosemeLenght { get; }
+        public double Sigma { get; }
+        public int KIndividualTornomantInit { get; }
         public FunctionSelected FunctionSelected { get; }
         public IList<Selection> SelectionList { get; }
         public IList<Strategy> Strategies { get; }

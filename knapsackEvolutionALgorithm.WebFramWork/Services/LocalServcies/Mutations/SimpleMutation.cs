@@ -3,6 +3,8 @@ using knapsackEvolutionALgorithm.Service.Entities;
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
 {
     public class SimpleMutation : IMutationMethod<Individual, Individual>
@@ -15,12 +17,12 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
             _items = items;
             _knapsackCapacity = knapsackCapacity;
         }
-        public Individual HandleMutation(Individual input)
+        public Task<Individual> HandleMutation(Individual input)
         {
             //Choose one point from chromosome
             var point = RandomHelper.CreateRandom(input.Generate.Count());
             input.Generate[point] = (input.Generate[point].Equals(true)) ? false : true;
-            return new Individual(input.Generate, _items, _knapsackCapacity);
+            return Task.FromResult( new Individual(input.Generate, _items, _knapsackCapacity));
         }
     }
 }

@@ -2,12 +2,25 @@
 
 namespace knapsackEvolutionALgorithm.Service.Entities
 {
-    public class MinFuncIndividula : BaseChromosome<int, double>
+    public class MinFuncIndividual : BaseChromosome<double, double>
     {
-        public MinFuncIndividula(int[] generate, double fitness)
+        public double Sigma { get; set; }
+        public MinFuncIndividual(double[] generate)
+        {
+            Generate = generate;
+            Fitness = 0;
+        }
+        public MinFuncIndividual(double[] generate, double fitness)
         {
             Generate = generate;
             Fitness = fitness;
+        }
+
+        public MinFuncIndividual(double[] generate, double fitness, double sigma)
+        {
+            Generate = generate;
+            Fitness = fitness;
+            Sigma = sigma;
         }
     }
 }

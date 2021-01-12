@@ -12,6 +12,17 @@ namespace knapsackEvolutionALgorithm.Service.Common.Utilities
                 input[i] = random.Next(0, 2) == 1 ? true : false;
             return input;
         }
-
     }
+
+    public static class DoubleExtentionMethod
+    {
+        public static double[] GenerateRandom(this double[] input)
+        {
+            var random = new Random();
+            for (int i = 0; i < input.Count(); i++)
+                input[i] = (RandomHelper.CreateRandom(100, 9999) / 1000);
+            return input;
+        }
+    }
+
 }

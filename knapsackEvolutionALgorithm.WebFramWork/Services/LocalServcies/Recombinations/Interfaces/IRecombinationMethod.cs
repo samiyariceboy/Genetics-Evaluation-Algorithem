@@ -2,6 +2,11 @@
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations.Interfaces
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     public interface IRecombinationMethod<in TSource, TResult>
         where TResult : TSource
     {

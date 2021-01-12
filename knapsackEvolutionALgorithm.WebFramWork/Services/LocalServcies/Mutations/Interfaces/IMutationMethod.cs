@@ -6,6 +6,19 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.In
         where TResult : class
         where TSource : class
     {
-        TResult HandleMutation(TSource input);
+        Task<TResult> HandleMutation(TSource input);
+    }
+
+    public interface IEsMutationMethod<in TSource, TResult> : IMutationMethod<TSource, TResult>
+        where TResult : class
+        where TSource : class
+    {
+        Task UpdateCase(TSource oldSource, TSource newSource);
+
+        /// <summary>
+        /// for example Sigma
+        /// </summary>
+        /// <returns></returns>
+        Task UpdateStatus();
     }
 }

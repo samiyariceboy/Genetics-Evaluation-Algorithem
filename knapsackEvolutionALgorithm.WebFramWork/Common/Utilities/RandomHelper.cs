@@ -15,5 +15,11 @@ namespace knapsackEvolutionALgorithm.Service.Common.Utilities
             var random = new Random();
             return random.Next(minValue, maxValue);
         }
+
+        public static double CreateRandom(double minValue, double maxValue)
+        {
+            var random = new Random();
+            return random.NextDouble() * (maxValue - minValue);
+        }
     }
 }

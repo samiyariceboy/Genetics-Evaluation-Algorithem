@@ -5,7 +5,6 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
     public class Function1 : IFunction
     {
         #region Propertes
-        private readonly int _nCount;
         private readonly int _a;
         #endregion
         #region Ctors
@@ -15,18 +14,19 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
             _a = a;
         }
 
-        public double ComputeFitness(int nCount)
+        public MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength)
         {
-            var result = Implement(nCount);
-            return 1000 - result;
+            var result = Implement(individual, chromosomeLength);
+            individual.Fitness = result;
+            return individual;
         }
         #endregion
-        public double Implement(int nCount)
+        public double Implement(MinFuncIndividual individual, int nCount)
         {
             var s = 0.0;
-            for (int x = 0; x < _nCount; x++)
-                s += (Math.Pow(x, 2) - (_a * Math.Cos(2*(Math.PI)*x)));
-            return (s + (_a * _nCount));
+            foreach (var x in individual.Generate)
+                s += (Math.Pow(x, 2) - (_a * Math.Cos(2 * (Math.PI) * x)));
+            return (s + (_a * nCount));
         }
 
         public IFunction Select(FunctionSelected selected)

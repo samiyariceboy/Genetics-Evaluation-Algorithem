@@ -20,31 +20,33 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
         }
 
         #endregion
-        public double Implement(int nCount)   
+        public double Implement(MinFuncIndividual individual, int chromosomeLength)   
         {
-            return _a * Math.Exp(_b * SQRT1()) - Math.Exp(PART2());
+
+            return _a * Math.Exp(_b * SQRT1(individual)) - Math.Exp(PART2(individual));
             #region nested Method
-            double SQRT1()
+            double SQRT1(MinFuncIndividual individual)
             {
                 var s = 0.0;
-                for (int x = 0; x < nCount; x++)
-                   s += Math.Pow(x, 2);
-                return Math.Sqrt((1 / nCount) * s);
+                foreach (var x in individual.Generate)
+                    s += Math.Pow(x, 2);
+                return Math.Sqrt((1 / chromosomeLength) * s);
             }
-            double PART2()
+            double PART2(MinFuncIndividual individual)
             {
                 var s = 0.0;
-                for (int x = 0; x < nCount; x++)
-                    s += Math.Cos(_c * x); 
-                return ((1/ nCount) * s);
+                foreach (var x in individual.Generate)
+                    s += Math.Cos(_c * x);
+                return ((1/ chromosomeLength) * s);
             }
             #endregion
         }
 
-        public double ComputeFitness(int nCount)
+        public MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength)
         {
-            var implemt = Implement(nCount);
-            return implemt;
+            var result = Implement(individual, chromosomeLength);
+            individual.Fitness = result;
+            return individual;
         }
 
         public void LoadFunction()

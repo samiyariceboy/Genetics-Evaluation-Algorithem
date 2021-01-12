@@ -67,6 +67,10 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.TournamentCheckBox = new System.Windows.Forms.CheckBox();
             this.KTournamentLabel = new System.Windows.Forms.Label();
             this.KTournamentCheckBox = new System.Windows.Forms.TextBox();
+            this.MinFuncChromosomeLength = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.sigmaTextBox = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             Generate = new System.Windows.Forms.Label();
             ExcutedTimeLabel = new System.Windows.Forms.Label();
@@ -107,7 +111,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(84, 61);
+            this.label5.Location = new System.Drawing.Point(84, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 20);
             this.label5.TabIndex = 17;
@@ -115,31 +119,34 @@ namespace knapsackEvolutionALgorithm.Presentation
             // 
             // MinFuncNumberOfParentsTextBox
             // 
-            this.MinFuncNumberOfParentsTextBox.Location = new System.Drawing.Point(11, 58);
+            this.MinFuncNumberOfParentsTextBox.Location = new System.Drawing.Point(7, 32);
             this.MinFuncNumberOfParentsTextBox.Name = "MinFuncNumberOfParentsTextBox";
             this.MinFuncNumberOfParentsTextBox.Size = new System.Drawing.Size(67, 27);
             this.MinFuncNumberOfParentsTextBox.TabIndex = 16;
+            this.MinFuncNumberOfParentsTextBox.Text = "100";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(84, 112);
+            this.label3.Location = new System.Drawing.Point(84, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 20);
             this.label3.TabIndex = 15;
             this.label3.Text = "تعداد تکرار نسل";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // MinFuncNumberOfGenerationRepetitionsTextBox
             // 
-            this.MinFuncNumberOfGenerationRepetitionsTextBox.Location = new System.Drawing.Point(12, 105);
+            this.MinFuncNumberOfGenerationRepetitionsTextBox.Location = new System.Drawing.Point(7, 62);
             this.MinFuncNumberOfGenerationRepetitionsTextBox.Name = "MinFuncNumberOfGenerationRepetitionsTextBox";
-            this.MinFuncNumberOfGenerationRepetitionsTextBox.Size = new System.Drawing.Size(63, 27);
+            this.MinFuncNumberOfGenerationRepetitionsTextBox.Size = new System.Drawing.Size(66, 27);
             this.MinFuncNumberOfGenerationRepetitionsTextBox.TabIndex = 14;
+            this.MinFuncNumberOfGenerationRepetitionsTextBox.Text = "100";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 13);
+            this.label2.Location = new System.Drawing.Point(84, 2);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 20);
             this.label2.TabIndex = 13;
@@ -147,10 +154,11 @@ namespace knapsackEvolutionALgorithm.Presentation
             // 
             // MinFuncEarlyPopulationTextBox
             // 
-            this.MinFuncEarlyPopulationTextBox.Location = new System.Drawing.Point(12, 8);
+            this.MinFuncEarlyPopulationTextBox.Location = new System.Drawing.Point(7, 3);
             this.MinFuncEarlyPopulationTextBox.Name = "MinFuncEarlyPopulationTextBox";
             this.MinFuncEarlyPopulationTextBox.Size = new System.Drawing.Size(66, 27);
             this.MinFuncEarlyPopulationTextBox.TabIndex = 12;
+            this.MinFuncEarlyPopulationTextBox.Text = "100";
             this.MinFuncEarlyPopulationTextBox.TextChanged += new System.EventHandler(this.EarlyPopulationTextBox_TextChanged);
             // 
             // ParentChangedTextBox
@@ -219,7 +227,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             // 
             // FunctionPicture1
             // 
-            this.FunctionPicture1.Location = new System.Drawing.Point(29, 26);
+            this.FunctionPicture1.Location = new System.Drawing.Point(29, 24);
             this.FunctionPicture1.Name = "FunctionPicture1";
             this.FunctionPicture1.Size = new System.Drawing.Size(341, 110);
             this.FunctionPicture1.TabIndex = 35;
@@ -255,9 +263,9 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.groupBox2.Controls.Add(this.FunctionPicture1);
             this.groupBox2.Controls.Add(this.radioFunction1);
             this.groupBox2.Controls.Add(this.FunctionPicture3);
-            this.groupBox2.Location = new System.Drawing.Point(11, 148);
+            this.groupBox2.Location = new System.Drawing.Point(11, 151);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(670, 438);
+            this.groupBox2.Size = new System.Drawing.Size(670, 439);
             this.groupBox2.TabIndex = 34;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Functions";
@@ -278,6 +286,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.cTextBox.Name = "cTextBox";
             this.cTextBox.Size = new System.Drawing.Size(44, 27);
             this.cTextBox.TabIndex = 51;
+            this.cTextBox.Text = "1";
             // 
             // label6
             // 
@@ -294,6 +303,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.bTextBox.Name = "bTextBox";
             this.bTextBox.Size = new System.Drawing.Size(44, 27);
             this.bTextBox.TabIndex = 49;
+            this.bTextBox.Text = "1";
             // 
             // aTextBox
             // 
@@ -301,6 +311,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.aTextBox.Name = "aTextBox";
             this.aTextBox.Size = new System.Drawing.Size(44, 27);
             this.aTextBox.TabIndex = 42;
+            this.aTextBox.Text = "1";
             // 
             // label4
             // 
@@ -388,6 +399,8 @@ namespace knapsackEvolutionALgorithm.Presentation
             // OnePerFiveStrategy
             // 
             this.OnePerFiveStrategy.AutoSize = true;
+            this.OnePerFiveStrategy.Checked = true;
+            this.OnePerFiveStrategy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.OnePerFiveStrategy.Location = new System.Drawing.Point(505, 44);
             this.OnePerFiveStrategy.Name = "OnePerFiveStrategy";
             this.OnePerFiveStrategy.Size = new System.Drawing.Size(53, 24);
@@ -398,6 +411,8 @@ namespace knapsackEvolutionALgorithm.Presentation
             // TournamentCheckBox
             // 
             this.TournamentCheckBox.AutoSize = true;
+            this.TournamentCheckBox.Checked = true;
+            this.TournamentCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TournamentCheckBox.Location = new System.Drawing.Point(297, 97);
             this.TournamentCheckBox.Name = "TournamentCheckBox";
             this.TournamentCheckBox.Size = new System.Drawing.Size(110, 24);
@@ -420,12 +435,52 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.KTournamentCheckBox.Name = "KTournamentCheckBox";
             this.KTournamentCheckBox.Size = new System.Drawing.Size(60, 27);
             this.KTournamentCheckBox.TabIndex = 57;
+            this.KTournamentCheckBox.Text = "5";
+            // 
+            // MinFuncChromosomeLength
+            // 
+            this.MinFuncChromosomeLength.Location = new System.Drawing.Point(8, 91);
+            this.MinFuncChromosomeLength.Name = "MinFuncChromosomeLength";
+            this.MinFuncChromosomeLength.Size = new System.Drawing.Size(65, 27);
+            this.MinFuncChromosomeLength.TabIndex = 58;
+            this.MinFuncChromosomeLength.Text = "10";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(84, 89);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 20);
+            this.label10.TabIndex = 59;
+            this.label10.Text = "طول کروموزوم";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // sigmaTextBox
+            // 
+            this.sigmaTextBox.Location = new System.Drawing.Point(9, 120);
+            this.sigmaTextBox.Name = "sigmaTextBox";
+            this.sigmaTextBox.Size = new System.Drawing.Size(65, 27);
+            this.sigmaTextBox.TabIndex = 60;
+            this.sigmaTextBox.Text = "0.2";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(84, 121);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 20);
+            this.label11.TabIndex = 61;
+            this.label11.Text = "سیگما";
             // 
             // MinimumPointFunctions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 646);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.sigmaTextBox);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.MinFuncChromosomeLength);
             this.Controls.Add(this.KTournamentCheckBox);
             this.Controls.Add(this.KTournamentLabel);
             this.Controls.Add(this.TournamentCheckBox);
@@ -511,5 +566,9 @@ namespace knapsackEvolutionALgorithm.Presentation
         private System.Windows.Forms.TextBox KTournamentCheckBox;
         private System.Windows.Forms.TextBox MinFuncNumberOfParentsTextBox;
         private System.Windows.Forms.TextBox MinFuncNumberOfGenerationRepetitionsTextBox;
+        private System.Windows.Forms.TextBox MinFuncChromosomeLength;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox sigmaTextBox;
+        private System.Windows.Forms.Label label11;
     }
 }

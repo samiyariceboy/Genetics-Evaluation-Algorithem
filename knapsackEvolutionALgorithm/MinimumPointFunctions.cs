@@ -5,6 +5,8 @@ using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Trains;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace knapsackEvolutionALgorithm.Presentation
@@ -52,11 +54,16 @@ namespace knapsackEvolutionALgorithm.Presentation
                     int.Parse(MinFuncEarlyPopulationTextBox.Text),
                     int.Parse(MinFuncNumberOfParentsTextBox.Text),
                     int.Parse(MinFuncNumberOfGenerationRepetitionsTextBox.Text),
+                    int.Parse(MinFuncChromosomeLength.Text),
+                    double.Parse(sigmaTextBox.Text),
+                    int.Parse(KTournamentCheckBox.Text),
                     FindFunctionSelected(),
                     FindSelections(),
                     FindStrategies()
                 );
-            var trainer = new MinPointFunctionTrain(CreateFunctions());
+
+            //Process in Handle Traner Process
+            var trainer = new MinPointFunctionTrain(mainFormGettingStarted, CreateFunctions().First());
             await trainer.DoTrain(mainFormGettingStarted);
         }
 
@@ -68,6 +75,17 @@ namespace knapsackEvolutionALgorithm.Presentation
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private async Task StartMultiApplication(MinFunGettingStarted gettingStarted)
+        {
+            foreach (var selectionMethod in gettingStarted.SelectionList)
+            {
+                foreach (var strategy in gettingStarted.Strategies)
+                {
+
+                }
+            }
         }
 
         private IList<IFunction> CreateFunctions()
@@ -111,6 +129,16 @@ namespace knapsackEvolutionALgorithm.Presentation
                 return FunctionSelected.Function3;
             else
                 return FunctionSelected.None;
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
 
         }
     }

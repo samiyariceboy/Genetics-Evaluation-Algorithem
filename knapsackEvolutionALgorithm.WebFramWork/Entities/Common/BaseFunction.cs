@@ -2,8 +2,8 @@
 {
     public interface IFunction
     {
-        double Implement(int nCount);
-        double ComputeFitness(int nCount);
+        double Implement(MinFuncIndividual individual, int nCount);
+        MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength);
     }
 
 }

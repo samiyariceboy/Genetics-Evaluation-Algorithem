@@ -2,6 +2,7 @@
 using knapsackEvolutionALgorithm.Service.Entities;
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
@@ -15,20 +16,20 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
         {
             _numberOfEarlyPopulation = numberOfEarlyPopulation;
         }
-        public async Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> SelectionBoxs, int chromosomeLength)
+        public Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> SelectionBoxs, int chromosomeLength, Selection selection)
         {
-            var firstPopulation = new List<MinFuncIndividual>();
-
-            await Task.Run(() =>
+            if (selection == Selection.Random)
             {
+                var firstPopulation = new List<MinFuncIndividual>();
                 for (int i = 0; i < _numberOfEarlyPopulation; i++)
                 {
                     firstPopulation.Add(new MinFuncIndividual(
                             new double[chromosomeLength].GenerateRandom()
-                        )) ;
+                        ));
                 }
-            });
-            return firstPopulation;
+                return Task.FromResult(firstPopulation as IList<MinFuncIndividual>);
+            }
+            return Task.FromResult(new List<MinFuncIndividual>() as IList<MinFuncIndividual>);
         }
     }
 }

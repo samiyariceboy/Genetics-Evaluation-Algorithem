@@ -1,9 +1,12 @@
-﻿namespace knapsackEvolutionALgorithm.Service.Entities.Common
+﻿using System.Threading.Tasks;
+
+namespace knapsackEvolutionALgorithm.Service.Entities.Common
 {
     public interface IFunction
     {
         double Implement(MinFuncIndividual individual, int nCount);
-        MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength);
+        Task<MinFuncIndividual> HandleFitness(MinFuncIndividual individual, int chromosomeLength, FunctionSelected functionSelected);
+        Task<MinFuncIndividual> ExcutedFitness(MinFuncIndividual individual, FunctionSelected functionSelected);
     }
 
 }

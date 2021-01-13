@@ -5,12 +5,37 @@ using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Entities.Functions.Handler
 {
-    public class FunctionsHnandler : IFunctionHandler
+    public class FunctionsHnandler : IFunctionHandler<MinFuncIndividual, MinFuncIndividual>
     {
-        public Task Handle(IList<IFunction> functions, FunctionSelected selected)
+        private IList<object> _functionRequestList = new List<object>();
+
+        public FunctionsHnandler(IList<object> functionRequestList)
         {
-            foreach (IFunction function in functions)
+            _functionRequestList = functionRequestList;
+        }
+
+        public async Task<MinFuncIndividual> ProcessHandleFitness(MinFuncIndividual individual, int chromosomeLength, FunctionSelected function)
+        {
+            foreach (IFunction functionRequest in _functionRequestList)
             {
+                var result = await functionRequest.HandleFitness(individual, chromosomeLength, function);
+                if (result is MinFuncIndividual && result.Generate != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        public async Task<MinFuncIndividual> ProcessHanldeExcutedFitness(MinFuncIndividual fitnessIndividual, FunctionSelected function)
+        {
+            foreach (IFunction functionRequest in _functionRequestList)
+            {
+                var result = await functionRequest.ExcutedFitness(fitnessIndividual, function);
+                if (result is MinFuncIndividual && result.Generate != null)
+                {
+                    return result;
+                }
             }
             return null;
         }

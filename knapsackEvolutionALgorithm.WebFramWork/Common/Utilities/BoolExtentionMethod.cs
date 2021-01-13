@@ -20,7 +20,7 @@ namespace knapsackEvolutionALgorithm.Service.Common.Utilities
         {
             var random = new Random();
             for (int i = 0; i < input.Count(); i++)
-                input[i] = (RandomHelper.CreateRandom(100, 9999) / 1000);
+                input[i] = (RandomHelper.CreateRandom01());
             return input;
         }
     }

@@ -19,7 +19,24 @@ namespace knapsackEvolutionALgorithm.Service.Common.Utilities
         public static double CreateRandom(double minValue, double maxValue)
         {
             var random = new Random();
-            return random.NextDouble() * (maxValue - minValue);
+            var ranomdCorrect = random.Next(Convert.ToInt32(minValue.ToString()),  int.Parse(Math.Ceiling(maxValue).ToString()));
+            var randomReal = random.Next(0, int.MaxValue);
+            var generateNumber = $"{ranomdCorrect}.{randomReal}";
+            return double.Parse(generateNumber);
+        }
+
+        public static double CreateRandom01()
+        {
+            var random = new Random();
+            var ranomd1 = random.Next(0, int.MaxValue);
+            var randomGenerator = double.Parse($"0.{ranomd1}");
+            return randomGenerator;
+        }
+
+        public static double CreateDoubleRandom()
+        {
+            var random = new Random();
+            return random.NextDouble();
         }
     }
 }

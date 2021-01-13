@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using knapsackEvolutionALgorithm.Service.Entities;
+using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces
 {
@@ -10,7 +11,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces
     public interface ISelectionMethod<in TSelectionBox, TResponse>
         where TSelectionBox : class
     {
-        Task<TResponse> HandleSelection(TSelectionBox SelectionBoxs, int capacity);
+        Task<TResponse> HandleSelection(TSelectionBox SelectionBoxs, int capacity, Selection selection);
     }
 }
     

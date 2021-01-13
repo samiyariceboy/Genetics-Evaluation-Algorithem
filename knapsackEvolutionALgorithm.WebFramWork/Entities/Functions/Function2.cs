@@ -1,5 +1,6 @@
 ﻿using knapsackEvolutionALgorithm.Service.Entities.Common;
 using System;
+using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Entities.Functions
 {
@@ -20,39 +21,41 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
         }
 
         #endregion
-        public double Implement(MinFuncIndividual individual, int chromosomeLength)   
+        public double Implement(MinFuncIndividual individual, int chromosomeLength)
         {
+            var sigma1 = 0.0;
+            var sigma2 = 0.0;
+            var fitness = 0.0;
 
-            return _a * Math.Exp(_b * SQRT1(individual)) - Math.Exp(PART2(individual));
-            #region nested Method
-            double SQRT1(MinFuncIndividual individual)
+            foreach (var x in individual.Generate)
             {
-                var s = 0.0;
-                foreach (var x in individual.Generate)
-                    s += Math.Pow(x, 2);
-                return Math.Sqrt((1 / chromosomeLength) * s);
+                sigma1 += (x * x);
+                sigma2 += (Math.Cos(_c * x));
             }
-            double PART2(MinFuncIndividual individual)
+
+            fitness = -_a * Math.Exp(-_b * Math.Sqrt(sigma1 / chromosomeLength)) - Math.Exp(sigma2 / chromosomeLength) + _a + Math.Exp(1);
+            return 50 - fitness;
+        }
+
+        public Task<MinFuncIndividual> HandleFitness(MinFuncIndividual individual, int chromosomeLength, FunctionSelected functionSelected)
+        {
+            if (functionSelected == FunctionSelected.Function2)
             {
-                var s = 0.0;
-                foreach (var x in individual.Generate)
-                    s += Math.Cos(_c * x);
-                return ((1/ chromosomeLength) * s);
+                double result = 0.0;
+                result = Implement(individual, chromosomeLength);
+                individual.Fitness = result;
+                return Task.FromResult(individual);
             }
-            #endregion
+            return Task.FromResult(new MinFuncIndividual(null));
         }
-
-        public MinFuncIndividual HandleFitness(MinFuncIndividual individual, int chromosomeLength)
+        public Task<MinFuncIndividual> ExcutedFitness(MinFuncIndividual individual, FunctionSelected functionSelected)
         {
-            var result = Implement(individual, chromosomeLength);
-            individual.Fitness = result;
-            return individual;
+            if (functionSelected == FunctionSelected.Function2)
+            {
+                individual.Fitness = 50 - individual.Fitness;
+                return Task.FromResult(individual);
+            }
+            return Task.FromResult(new MinFuncIndividual(null));
         }
-
-        public void LoadFunction()
-        {
-
-        }
-
     }
 }

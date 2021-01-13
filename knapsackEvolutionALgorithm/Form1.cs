@@ -41,7 +41,6 @@ namespace knapsackEvolutionALgorithm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //ItemsTextBox1.Text = "26,70\n47,78\n21,39\n42,41\n73,37\n43,55\n90,24\n80,85\n56,84\n69,75\n1,56\n73,97\n66,37\n10,77\n58,75\n38,31\n20,\n28,\n65,86\n36,60\n49,67\n64,\n61,\n1,47\n83,55\n29,51\n9,9\n92,\n72,8\n97,86";
 
         }
 

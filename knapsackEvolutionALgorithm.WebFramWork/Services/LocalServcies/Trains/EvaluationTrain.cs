@@ -33,18 +33,18 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
         /// </summary>
         /// <returns></returns>
 
-        public async Task DoTrain(GettingStarted gettingStarted)
+        public async Task<bool> DoTrain(GettingStarted gettingStarted)
         {
-            var firstPopulation = await _randomSelection.HandleSelection(gettingStarted.Items, gettingStarted.KnapsakCapacity);
+            var firstPopulation = await _randomSelection.HandleSelection(gettingStarted.Items, gettingStarted.KnapsakCapacity, Selection.Random);
             var maximumChild = new Individual(gettingStarted.Items);
             await Task.Run(() => 
             {
                 for (int i = 0; i < gettingStarted.NumberOfGenerationRepetitions; i++)
                 {
                     TryChanged.Invoke(i);
-                    var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, gettingStarted.NumberOfParents).Result;
+                    var parent =  _rouletteWeelSelection.HandleSelection(firstPopulation, gettingStarted.NumberOfParents, Selection.RouletteWheel).Result;
                     //فاصله گرفتن از  
-                    firstPopulation = _rouletteWeelSelection.HandleSelection(parent, gettingStarted.NumberOfParents).Result;
+                    firstPopulation = _rouletteWeelSelection.HandleSelection(parent, gettingStarted.NumberOfParents, Selection.RouletteWheel).Result;
 
                     for (int j = 0; j < gettingStarted.NumberOfParents ; j++)
                     {
@@ -65,7 +65,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                         }
 
                         //Recombination between two chromosomes together
-                        var childs = _crossOver.HandleRecombination(firstPopulation[j], firstPopulation[j + 1]).Result;
+                        var childs = _crossOver.HandleRecombination(firstPopulation[j], firstPopulation[j + 1], Recombination.None).Result;
 
                         /// میو + لاندا
                         firstPopulation.Add(childs.first);
@@ -89,6 +89,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies
                 }
             });
             ExcetedFitness = maximumChild.Fitness;
+            return true;
         }
     }
 }

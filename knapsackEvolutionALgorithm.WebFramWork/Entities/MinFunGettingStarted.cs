@@ -13,40 +13,65 @@ namespace knapsackEvolutionALgorithm.Service.Entities
                 double sigma,
                 int kIndividualTornomantInit,
 
+                int a,
+                int b,
+                int c,
+
                 FunctionSelected functionSelected,
-                IList<Selection> selectionList,
-                IList<Strategy> strategies
+                Selection selectionList,
+                Recombination recombinations,
+                Mutation mutations
             ) 
             : base(earlyPopulation, numberOfParents, numberOfGenerationRepetitions)
         {
             ChoromosemeLenght = choromosemeLenght;
             Sigma = sigma;
             KIndividualTornomantInit = kIndividualTornomantInit;
+            A = a;
+            B = b;
+            C = c;
             FunctionSelected = functionSelected;
             SelectionList = selectionList;
-            Strategies = strategies;
+            Recombinations = recombinations;
+            mutationList = mutations;
         }
 
         public int ChoromosemeLenght { get; }
         public double Sigma { get; }
         public int KIndividualTornomantInit { get; }
+        public int A { get; }
+        public int B { get; }
+        public int C { get; }
         public FunctionSelected FunctionSelected { get; }
-        public IList<Selection> SelectionList { get; }
-        public IList<Strategy> Strategies { get; }
+        public Selection SelectionList { get; }
+        public Recombination Recombinations { get; }
+        public Mutation mutationList { get; }
     }
 
     #region Enums
     public enum Selection
     {
+        Random,
+        SelfAdaptionRandom,
         RouletteWheel,
         SUS,
-        Tournament
+        Tournament,
+        None
     }
 
-    public enum Strategy
+    public enum Mutation
     {
         OnePerFive,
-        SelfAdaptetion
+        SelfAdaptetion,
+        None
+    }
+
+    public enum Recombination
+    {
+        Single,
+        Simple,
+        Whole,
+        None
     }
 
     public enum FunctionSelected

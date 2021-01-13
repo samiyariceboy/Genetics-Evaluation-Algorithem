@@ -10,43 +10,40 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
     public class MinFuncRouletteWeelSelection
          : ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>>
     {
-        public MinFuncRouletteWeelSelection()
+        public Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> selectionBoxs, int numberOfSelection, Selection selection)
         {
-        }
-        public async Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> selectionBoxs, int numberOfSelection)
-        {
-            var selectiveIndividulas = new List<MinFuncIndividual>();
-            var rouletteSelect = new List<double>();
-            await Task.Run(() => 
+            if (selection == Selection.RouletteWheel)
             {
-                for (int i = 0; i < selectionBoxs.Count(); i++)
-                {
-                    if (i == 0)
-                        rouletteSelect.Add(selectionBoxs[i].Fitness);
-                    else
-                        rouletteSelect.Add(selectionBoxs[i-1].Fitness + selectionBoxs[i].Fitness);
-                }
-            });
+                IList<MinFuncIndividual> selectiveIndividulas = new List<MinFuncIndividual>();
+                var camulativ = ComputeCumulativeSum(selectionBoxs);
 
-            await Task.Run(() =>
-            {
                 for (int i = 0; i < numberOfSelection; i++)
                 {
-                    var random = RandomHelper.CreateRandom(0, rouletteSelect[selectionBoxs.Count() - 1]);
-                    for (int j = 0; j < rouletteSelect.Count(); j++)
+                    var random = RandomHelper.CreateRandom(0, camulativ.cumulativeSumOfFitness[selectionBoxs.Count() - 1]);
+                    for (int j = 0; j < camulativ.cumulativeSumOfFitness.Count() - 1; j++)
                     {
-                        if (random >= rouletteSelect[j] && random < rouletteSelect[j+1])
+                        if ((random >= camulativ.cumulativeSumOfFitness[j] && random <= camulativ.cumulativeSumOfFitness[j + 1]) || camulativ.totalFitness == 0)
                         {
                             selectiveIndividulas.Add(selectionBoxs[j]);
                             break;
                         }
-
                     }
                 }
-            });
+                return Task.FromResult(selectiveIndividulas);
+            }
+            return Task.FromResult(new List<MinFuncIndividual>() as IList<MinFuncIndividual>);
+        }
 
-            return selectiveIndividulas;
-
+        private (double totalFitness, IList<double> cumulativeSumOfFitness) ComputeCumulativeSum(IList<MinFuncIndividual> selectionBoxs)
+        {
+            IList<double> cumulativeSumOfFitness = new List<double>();
+            double totalFitness = 0; 
+            for (int i = 0; i < selectionBoxs.Count; i++)
+            {
+                totalFitness += selectionBoxs[i].Fitness;
+                cumulativeSumOfFitness.Add(totalFitness);
+            }
+            return (totalFitness, cumulativeSumOfFitness);
         }
 
     }

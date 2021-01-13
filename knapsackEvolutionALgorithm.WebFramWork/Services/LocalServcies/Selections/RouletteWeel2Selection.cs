@@ -9,7 +9,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
 {
     public class RouletteWeel2Selection : ISelectionMethod<IList<Individual>, IList<Individual>>
     {
-        public async Task<IList<Individual>> HandleSelection(IList<Individual> SelectionBoxs, int capacity)
+        public async Task<IList<Individual>> HandleSelection(IList<Individual> SelectionBoxs, int capacity, Selection selectionSelected)
         {
             var totalRoulet = 0;
             var selection = new List<Individual>();

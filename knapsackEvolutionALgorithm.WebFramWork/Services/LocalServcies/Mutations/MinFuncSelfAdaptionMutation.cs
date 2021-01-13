@@ -20,28 +20,29 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
             _sigma = sigma;
         }
 
-        public async Task<MinFuncIndividual> HandleMutation(MinFuncIndividual individual)
+        public Task<MinFuncIndividual> HandleMutation(MinFuncIndividual individual, Mutation mutationSelected)
         {
-            var child = new MinFuncIndividual(new double[_chromosomeLength]);
-            child.Sigma = NormalDistribute.DoWork(0, individual.Sigma) + individual.Sigma;
-
-            await Task.Run(() =>
+            if (mutationSelected == Mutation.SelfAdaptetion)
             {
+                var child = new MinFuncIndividual(new double[_chromosomeLength]);
+                child.Sigma = NormalDistribute.DoWork(0, individual.Sigma) + individual.Sigma;
+
                 for (int i = 0; i < _chromosomeLength; i++)
                     child.Generate[i] = NormalDistribute.DoWork(0, _sigma) + individual.Generate[i];
-            });
 
-            return child;
+                return Task.FromResult(child);
+            }
+            return Task.FromResult(individual);
         }
 
-        public Task UpdateCase(MinFuncIndividual oldSource, MinFuncIndividual newSource)
+        public Task<bool> UpdateCase(MinFuncIndividual oldSource, MinFuncIndividual newSource, Mutation mutation)
         {
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
 
-        public Task UpdateStatus()
+        public Task<bool> UpdateStatus(Mutation mutation)
         {
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
     }
 }

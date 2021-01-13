@@ -17,7 +17,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
             NumberOfEarlyPopulation = numberOfEarlyPopulation;
         }
 
-        public async Task<IList<Individual>> HandleSelection(IList<Item> SelectionBoxs, int capacity)
+        public async Task<IList<Individual>> HandleSelection(IList<Item> SelectionBoxs, int capacity, Selection selection)
         {
             var firstPopulation = new List<Individual>();
             var numberOfEarlyPopulation = NumberOfEarlyPopulation;

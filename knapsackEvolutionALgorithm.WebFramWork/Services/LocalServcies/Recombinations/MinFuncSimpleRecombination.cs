@@ -16,22 +16,22 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinatio
             _chromosomeLength = chromosomeLength;
             _alfa = alfa;
         }
-        public async Task<(MinFuncIndividual first, MinFuncIndividual second)> HandleRecombination(MinFuncIndividual parent1, MinFuncIndividual parent2)
+        public Task<(MinFuncIndividual first, MinFuncIndividual second)> HandleRecombination(MinFuncIndividual parent1, MinFuncIndividual parent2, Recombination recombination)
         {
-            var random = RandomHelper.CreateRandom(0, _chromosomeLength);
-            var child1 = new MinFuncIndividual(new double[_chromosomeLength]);
-            var child2 = new MinFuncIndividual(new double[_chromosomeLength]);
-
-            await Task.Run(() =>
+            if (recombination == Recombination.Simple)
             {
+                var random = RandomHelper.CreateRandom(0, _chromosomeLength);
+                var child1 = new MinFuncIndividual(new double[_chromosomeLength]);
+                var child2 = new MinFuncIndividual(new double[_chromosomeLength]);
+
                 for (int i = random; i < _chromosomeLength; i++)
                 {
                     child1.Generate[i] = (parent1.Generate[i] * _alfa) + (parent2.Generate[i] * (1 - _alfa));
                     child2.Generate[i] = (parent1.Generate[i] * _alfa) + (parent2.Generate[i] * (1 - _alfa));
                 }
-                  
-            });
-            return (child1, child2);
+                return Task.FromResult((child1, child2));
+            }
+            return Task.FromResult((new MinFuncIndividual(null), new MinFuncIndividual(null)));
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using knapsackEvolutionALgorithm.Service.Entities;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections.Handlers.Interfaces
 {
-    public interface ISelectionHandler
+    public interface ISelectionHandler<TRequest, TResult>
+        where TRequest : class
+        where TResult : class
     {
-        Task ProcessSelection(ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>> selectionMethod);
+        Task<TResult> ProcessSelection(TRequest selectionBox, int capacity, Selection selection);
     }
 }

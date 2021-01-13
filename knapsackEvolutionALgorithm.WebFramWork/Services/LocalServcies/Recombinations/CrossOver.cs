@@ -24,14 +24,15 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinatio
             _simpleMutation = new SimpleMutation(items, knapsackCapacity);
         }
 
-        public async Task<(Individual first, Individual second)> HandleRecombination(Individual first, Individual second)
+        public async Task<(Individual first, Individual second)> HandleRecombination(Individual first, Individual second, Recombination recombination)
         {
+
             var point1 = RandomHelper.CreateRandom(1, first.Generate.Count());
             var point2 = RandomHelper.CreateRandom(point1, first.Generate.Count());
             bool[] child1Generate = new bool[first.Generate.Count()];
             bool[] child2Generate = new bool[first.Generate.Count()];
 
-            await Task.Run(() => 
+            await Task.Run(() =>
             {
                 for (int i = 0; i < first.Generate.Count(); i++)
                 {
@@ -51,13 +52,14 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinatio
             });
             var child1 = new Individual(child1Generate, _items, _knapsackCapacity);
             var child2 = new Individual(child2Generate, _items, _knapsackCapacity);
-            
+
             //noise for mutation
             if (RandomHelper.CreateRandom(0, 100) < 35)
-                child1 = await _simpleMutation.HandleMutation(child1);
+                child1 = await _simpleMutation.HandleMutation(child1, Mutation.None);
             if (RandomHelper.CreateRandom(0, 100) < 35)
-                child2 = await _simpleMutation.HandleMutation(child2);
+                child2 = await _simpleMutation.HandleMutation(child2, Mutation.None);
             return (child1, child2);
+
         }
     }
 }

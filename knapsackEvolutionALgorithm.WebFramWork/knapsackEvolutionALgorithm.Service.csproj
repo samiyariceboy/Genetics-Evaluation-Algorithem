@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\LocalServcies\Mutations\Handlers\Interfaces\" />
-    <Folder Include="Services\LocalServcies\Trains\Handlers\Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Troschuetz.Random" Version="5.0.1" />
   </ItemGroup>
 

@@ -17,7 +17,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations
             _items = items;
             _knapsackCapacity = knapsackCapacity;
         }
-        public Task<Individual> HandleMutation(Individual input)
+        public Task<Individual> HandleMutation(Individual input, Mutation mutation)
         {
             //Choose one point from chromosome
             var point = RandomHelper.CreateRandom(input.Generate.Count());

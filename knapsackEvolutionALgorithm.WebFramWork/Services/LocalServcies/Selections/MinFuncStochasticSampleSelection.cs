@@ -1,4 +1,5 @@
-﻿using knapsackEvolutionALgorithm.Service.Common.Utilities;
+﻿
+using knapsackEvolutionALgorithm.Service.Common.Utilities;
 using knapsackEvolutionALgorithm.Service.Entities;
 using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces;
 using System.Collections.Generic;
@@ -10,52 +11,57 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections
     public class MinFuncStochasticSampleSelection
         : ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>>
     {
-        #region Properties
-        private IList<double> _cumulativeSumOfFitness;
-        private double _totalFitness;
-        #endregion
-        public MinFuncStochasticSampleSelection()
+        public Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> selectionBoxs, int amountOfSelection, Selection selection)
         {
-            //Create Cumulative sum
-            _cumulativeSumOfFitness = new List<double>();
-        }
-        public async Task<IList<MinFuncIndividual>> HandleSelection(IList<MinFuncIndividual> selectionBoxs, int capacity)
-        {
-            var selectiveIndividulas = new List<MinFuncIndividual>();
-            selectionBoxs.OrderByDescending(S => S.Fitness);
-
-            //Explane: Cumulative sum and return in fields
-            await ComputeCumulativeSum(selectionBoxs);
-
-            // Select the best individual that sorted
-            selectiveIndividulas.Add(selectionBoxs[0]);
-
-            await Task.Run(() =>
+            if (selection == Selection.SUS)
             {
-                var random = RandomHelper.CreateRandom(0, int.Parse(_cumulativeSumOfFitness[0].ToString()));
-                var stepLength = _totalFitness / capacity;
-                for (int i = 0; i < capacity; i++)
+                IList<MinFuncIndividual> selectiveIndividulas = new List<MinFuncIndividual>();
+                selectionBoxs = selectionBoxs.OrderByDescending(S => S.Fitness).ToList();
+                var totalfitness = ComputeCumulativeSum(selectionBoxs);
+
+                var pointer = (RandomHelper.CreateRandom(0, totalfitness / amountOfSelection) );
+
+                double ptr = 0;
+
+                foreach (var individual in selectionBoxs)
                 {
-                    for (int j = 0; j < _cumulativeSumOfFitness.Count(); j++)
+                    ptr += individual.Fitness;
+                    while ((ptr - individual.Fitness <= pointer && pointer <= ptr) || totalfitness == 0)
                     {
-                        if (_cumulativeSumOfFitness[j] <
-                                        ((i * stepLength) + random) &&
-                            _cumulativeSumOfFitness[j + 1] > ((i * stepLength) + random))
-                            selectiveIndividulas.Add(selectionBoxs[j]);
+                        selectiveIndividulas.Add(individual);
+                        pointer += totalfitness / amountOfSelection;
+                        if (selectiveIndividulas.Count() == amountOfSelection)
+                            break;
                     }
+                    if (selectiveIndividulas.Count() == amountOfSelection)
+                        break;
                 }
-            });
-            return selectiveIndividulas;
+                #region OldCode
+                /*
+                foreach (var individual in selectionBoxs)
+                {
+                    ptr += individual.Fitness;
+                    if (pointer <= ptr)
+                    {
+                        selectiveIndividulas.Add(individual);
+                        if (selectiveIndividulas.Count() == amountOfSelection) 
+                            break;
+                        pointer += _totalFitness / amountOfSelection;
+                    }
+                }*/
+                #endregion
+                return Task.FromResult(selectiveIndividulas);
+            }
+            return Task.FromResult(new List<MinFuncIndividual>() as IList<MinFuncIndividual>);
+
         }
 
-        private Task ComputeCumulativeSum(IList<MinFuncIndividual> selectionBoxs)
+        private double ComputeCumulativeSum(IList<MinFuncIndividual> selectionBoxs)
         {
-            for (int i = 0; i < selectionBoxs.Count; i++)
-            {
-                _totalFitness += selectionBoxs[i].Fitness;
-                _cumulativeSumOfFitness.Add(_totalFitness);
-            }
-            return Task.CompletedTask;
+            var totalfitness = 0.0;
+            foreach (var individual in selectionBoxs)
+                totalfitness += individual.Fitness;
+            return totalfitness;
         }
     }
 }

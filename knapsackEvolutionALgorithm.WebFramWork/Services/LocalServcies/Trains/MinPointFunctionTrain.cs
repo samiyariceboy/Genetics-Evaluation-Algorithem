@@ -1,95 +1,150 @@
 ﻿using knapsackEvolutionALgorithm.Service.Common.Utilities;
 using knapsackEvolutionALgorithm.Service.Entities;
-using knapsackEvolutionALgorithm.Service.Entities.Common;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Interfaces;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.Interfaces;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations.Interfaces;
-using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections;
+using knapsackEvolutionALgorithm.Service.Entities.Functions.Handler;
+using knapsackEvolutionALgorithm.Service.Entities.Functions.Handler.Interfaces;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.Handlers;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Mutations.Handlers.Interfaces;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations.Handler;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Recombinations.Handler.Interfaces;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections.Handlers;
+using knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections.Handlers.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Troschuetz.Random.Distributions.Continuous;
 
 namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Trains
 {
-    public class MinPointFunctionTrain : ITrain<MinFunGettingStarted, int>
+    public delegate void ChangeNotification(MinFuncIndividual minFuncIndividual, MutationOrRecombination mutationOrRecombination, int parentIndex, int tryIndex);
+    public delegate void Notification(int idenx);
+
+    public class MinPointFunctionTrain : ITrain<MinFunGettingStarted, MinFuncIndividual>
     {
-        #region Properties and fields
+        #region Handlers
+        private readonly ISelectionHandler<IList<MinFuncIndividual>, IList<MinFuncIndividual>> _selectionHandler;
+        private readonly IList<object> _selectioList;
+        //---------------------------------------------------------
+        private readonly IRecombinationHandler<MinFuncIndividual, MinFuncIndividual> _recombinationHandler;
+        private readonly IList<object> _recombinationList;
+        //---------------------------------------------------------
+        private readonly IMutationnHandler<MinFuncIndividual, MinFuncIndividual> _mutationnHandler;
+        private readonly IList<object> _mutationList;
+        //---------------------------------------------------------
+        private readonly IFunctionHandler<MinFuncIndividual, MinFuncIndividual> _functionHandler;
+        private readonly IList<object> _functionList;
 
-        private readonly IFunction _function;
-        private readonly MinFuncRandomSelection _normalRandomSelection;
-        private readonly IEsMutationMethod<MinFuncIndividual, MinFuncIndividual> _onePerFiveMutation;
-
-
-        private readonly ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>> _rouletteWheelSelection;
-        private readonly ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>> _tournamentSelection;
-
-        IRecombinationMethod<MinFuncIndividual, MinFuncIndividual> _simpleRecombination;
+        #endregion
+        #region Events
+        public event ChangeNotification MaximumChildChanged;
+        public event Notification TryChanged;
+        public event Notification ParentChanged;
         #endregion
 
+        public MinFuncIndividual ExcetedFitness { get; set; }
 
-
-        public int ExcetedFitness { get; set; }
-
-        public MinPointFunctionTrain(MinFunGettingStarted gettingStarted, IFunction function)
+        public MinPointFunctionTrain
+            (
+                IList<object> selectioList,
+                IList<object> recombinationList,
+                IList<object> mutationList,
+                IList<object> functionList
+            )
         {
-            _function = function;
-            _normalRandomSelection = new MinFuncRandomSelection(gettingStarted.EarlyPopulation);
-            _tournamentSelection = new MinFuncTournamentSelection(gettingStarted.KIndividualTornomantInit);
-            _rouletteWheelSelection = new MinFuncRouletteWeelSelection();
-
-
-            _simpleRecombination = new MinFuncSimpleRecombination(gettingStarted.ChoromosemeLenght, 0.5);
-            _onePerFiveMutation = new MinFuncOnePerFiveMutation(gettingStarted.ChoromosemeLenght, gettingStarted.Sigma);
+            #region Init
+            _selectioList = selectioList;
+            _selectionHandler = new SelectionHandle(_selectioList);
+            //---------------------------------------------------------
+            _recombinationList = recombinationList;
+            _recombinationHandler = new RecombinationHandler(recombinationList);
+            //---------------------------------------------------------
+            _mutationList = mutationList;
+            _mutationnHandler = new MutationHandler(mutationList);
+            //---------------------------------------------------------
+            _functionList = functionList;
+            _functionHandler = new FunctionsHnandler(functionList);
+            #endregion
         }
-
-        public async Task DoTrain(MinFunGettingStarted gettingStarted)
+        public async Task<bool> DoTrain(MinFunGettingStarted gettingStarted)
         {
-            var firstPopulation = await _normalRandomSelection.HandleSelection(null, gettingStarted.ChoromosemeLenght);
+            var firstPopulation = await _selectionHandler.ProcessSelection(null, gettingStarted.ChoromosemeLenght, Selection.Random);
             var maximumChild = new MinFuncIndividual(new double[gettingStarted.ChoromosemeLenght]);
 
             await Task.Run(() =>
             {
+                //var threadId = Thread.CurrentThread.ManagedThreadId;
                 for (int i = 0; i < gettingStarted.NumberOfGenerationRepetitions; i++)
                 {
-                    var parent = _rouletteWheelSelection.HandleSelection(firstPopulation, gettingStarted.NumberOfParents).Result;
-                    for (int j = 0; j < gettingStarted.NumberOfParents; j++)
+                    //threadId = Thread.CurrentThread.ManagedThreadId;
+                    TryChanged.Invoke(i);
+                    var parent = _selectionHandler.ProcessSelection(firstPopulation, gettingStarted.NumberOfParents, gettingStarted.SelectionList).Result;
+                    for (int j = 0; j < gettingStarted.NumberOfParents - 1; j++)
                     {
-                        var random = RandomHelper.CreateRandom(0, 10);  
+                        ParentChanged.Invoke(i);
+                        var random = RandomHelper.CreateRandom(0, 10);
                         if (random == 5)
                         {
                             //create childs by recombination
-                            var childs = _simpleRecombination.HandleRecombination(parent[j], parent[j + 1]).Result;
+                            var childs =  _recombinationHandler.ProcessRecombinationHandler(parent[j], parent[j + 1], gettingStarted.Recombinations).Result;
 
                             // Compute childs fitness to function
-                            childs.first = _function.HandleFitness(childs.first, gettingStarted.ChoromosemeLenght);
-                            childs.second = _function.HandleFitness(childs.first, gettingStarted.ChoromosemeLenght);
+                            var child1New = _functionHandler.ProcessHandleFitness(childs.first, gettingStarted.ChoromosemeLenght, gettingStarted.FunctionSelected).Result;
+                            var child2New = _functionHandler.ProcessHandleFitness(childs.second, gettingStarted.ChoromosemeLenght, gettingStarted.FunctionSelected).Result;
+
+
+                            //Choose Max Child//
+                            var chooseChild = (child1New.Fitness >= child2New.Fitness) ?
+                                child1New : child2New;
+
+                            if (chooseChild.Fitness > maximumChild.Fitness)
+                            {
+                                maximumChild = chooseChild;
+                                //Invoke
+                                MaximumChildChanged.Invoke(maximumChild, MutationOrRecombination.Recombination, j, i);
+                            }
 
                             // میو + لاندا
-                            firstPopulation.Add(childs.first);
-                            firstPopulation.Add(childs.second);
+                            firstPopulation.Add(child1New);
+                            firstPopulation.Add(child2New);
                         }
                         else
                         {
                             //create childs by mutation
-                            var mutationChild = _onePerFiveMutation.HandleMutation(parent[j]).Result;
+                            var mutationChild = _mutationnHandler.ProcessMutationHandler(parent[j], gettingStarted.mutationList).Result;
 
                             //update child fitness => by function
-                            var childUpdateFitness = _function.HandleFitness(mutationChild, gettingStarted.ChoromosemeLenght);
-                            
+                            var childUpdateFitness = _functionHandler.ProcessHandleFitness(mutationChild, gettingStarted.ChoromosemeLenght, gettingStarted.FunctionSelected).Result;
+
+                            //Choose Max Child //
+                            maximumChild = (childUpdateFitness.Fitness > maximumChild.Fitness) ?
+                                childUpdateFitness : maximumChild;
+
+                            if (childUpdateFitness.Fitness > maximumChild.Fitness)
+                            {
+                                maximumChild = childUpdateFitness;
+                                //Invoke
+                                MaximumChildChanged.Invoke(maximumChild, MutationOrRecombination.Mutation, j, i);
+                            }
+
                             //update case positive or not
-                            _onePerFiveMutation.UpdateCase(mutationChild, childUpdateFitness);
+                            _mutationnHandler.ProcessUpdateCase(mutationChild, childUpdateFitness, gettingStarted.mutationList);
 
                             // میو + لاندا
                             firstPopulation.Add(childUpdateFitness);
                         }
                     }
-
                     // update sigma
-                    _onePerFiveMutation.UpdateStatus();
+                    _mutationnHandler.ProcessUpdateStatus(gettingStarted.mutationList);
                 }
+                ExcetedFitness = _functionHandler.ProcessHanldeExcutedFitness(maximumChild, gettingStarted.FunctionSelected).Result;
             });
+            
+            return true;
         }
     }
+
+    #region Enums
+    public enum MutationOrRecombination
+    {
+        Mutation,
+        Recombination
+    }
+    #endregion
 }

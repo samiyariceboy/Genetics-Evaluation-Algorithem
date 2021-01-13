@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 
 namespace knapsackEvolutionALgorithm.Service.Entities.Functions.Handler.Interfaces
 {
-    public interface IFunctionHandler
+    public interface IFunctionHandler<in TRequest, TResult>
     {
-        Task Handle(IList<IFunction> functions, FunctionSelected selected);
+        Task<TResult> ProcessHandleFitness(TRequest infividual, int chromosomeLength, FunctionSelected function);
+        Task<TResult> ProcessHanldeExcutedFitness(TRequest fitness, FunctionSelected function);
     }
 }

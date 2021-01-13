@@ -57,20 +57,24 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.maximumChildsTextBox = new System.Windows.Forms.RichTextBox();
+            this.SelfAdaptionRadioButton = new System.Windows.Forms.RadioButton();
+            this.OnePerFiveRadioButton = new System.Windows.Forms.RadioButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.SUSCheckBox = new System.Windows.Forms.CheckBox();
-            this.RouletteWheelCheckBox = new System.Windows.Forms.CheckBox();
-            this.SelfAdaptionCheckBox = new System.Windows.Forms.CheckBox();
-            this.OnePerFiveStrategy = new System.Windows.Forms.CheckBox();
-            this.TournamentCheckBox = new System.Windows.Forms.CheckBox();
             this.KTournamentLabel = new System.Windows.Forms.Label();
             this.KTournamentCheckBox = new System.Windows.Forms.TextBox();
             this.MinFuncChromosomeLength = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.sigmaTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.singleRecombinationRadioButton = new System.Windows.Forms.RadioButton();
+            this.SimpleREcombinationRadioButton = new System.Windows.Forms.RadioButton();
+            this.WholeRecombinationrRdioButton = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TournamentRadioButton = new System.Windows.Forms.RadioButton();
+            this.SUSRadioButton = new System.Windows.Forms.RadioButton();
+            this.RouletteWheelRadiButton = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             label7 = new System.Windows.Forms.Label();
             Generate = new System.Windows.Forms.Label();
             ExcutedTimeLabel = new System.Windows.Forms.Label();
@@ -79,6 +83,9 @@ namespace knapsackEvolutionALgorithm.Presentation
             ((System.ComponentModel.ISupportInitialize)(this.FunctionPicture3)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label7
@@ -187,7 +194,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             // 
             // Run
             // 
-            this.Run.Location = new System.Drawing.Point(689, 605);
+            this.Run.Location = new System.Drawing.Point(689, 603);
             this.Run.Name = "Run";
             this.Run.Size = new System.Drawing.Size(94, 29);
             this.Run.TabIndex = 27;
@@ -202,7 +209,6 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.radioFunction3.Name = "radioFunction3";
             this.radioFunction3.Size = new System.Drawing.Size(17, 16);
             this.radioFunction3.TabIndex = 40;
-            this.radioFunction3.TabStop = true;
             this.radioFunction3.UseVisualStyleBackColor = true;
             // 
             // radioFunction2
@@ -212,12 +218,12 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.radioFunction2.Name = "radioFunction2";
             this.radioFunction2.Size = new System.Drawing.Size(17, 16);
             this.radioFunction2.TabIndex = 39;
-            this.radioFunction2.TabStop = true;
             this.radioFunction2.UseVisualStyleBackColor = true;
             // 
             // radioFunction1
             // 
             this.radioFunction1.AutoSize = true;
+            this.radioFunction1.Checked = true;
             this.radioFunction1.Location = new System.Drawing.Point(2, 71);
             this.radioFunction1.Name = "radioFunction1";
             this.radioFunction1.Size = new System.Drawing.Size(17, 16);
@@ -327,18 +333,40 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.groupBox3.Controls.Add(this.maximumChildsTextBox);
             this.groupBox3.Location = new System.Drawing.Point(689, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(394, 578);
+            this.groupBox3.Size = new System.Drawing.Size(543, 578);
             this.groupBox3.TabIndex = 41;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Instant Changes";
             // 
             // maximumChildsTextBox
             // 
-            this.maximumChildsTextBox.Location = new System.Drawing.Point(6, 26);
+            this.maximumChildsTextBox.Location = new System.Drawing.Point(0, 18);
             this.maximumChildsTextBox.Name = "maximumChildsTextBox";
-            this.maximumChildsTextBox.Size = new System.Drawing.Size(382, 532);
+            this.maximumChildsTextBox.Size = new System.Drawing.Size(531, 548);
             this.maximumChildsTextBox.TabIndex = 32;
             this.maximumChildsTextBox.Text = "";
+            // 
+            // SelfAdaptionRadioButton
+            // 
+            this.SelfAdaptionRadioButton.AutoSize = true;
+            this.SelfAdaptionRadioButton.Location = new System.Drawing.Point(6, 64);
+            this.SelfAdaptionRadioButton.Name = "SelfAdaptionRadioButton";
+            this.SelfAdaptionRadioButton.Size = new System.Drawing.Size(121, 24);
+            this.SelfAdaptionRadioButton.TabIndex = 71;
+            this.SelfAdaptionRadioButton.Text = "Self Adaption";
+            this.SelfAdaptionRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // OnePerFiveRadioButton
+            // 
+            this.OnePerFiveRadioButton.AutoSize = true;
+            this.OnePerFiveRadioButton.Checked = true;
+            this.OnePerFiveRadioButton.Location = new System.Drawing.Point(6, 34);
+            this.OnePerFiveRadioButton.Name = "OnePerFiveRadioButton";
+            this.OnePerFiveRadioButton.Size = new System.Drawing.Size(52, 24);
+            this.OnePerFiveRadioButton.TabIndex = 70;
+            this.OnePerFiveRadioButton.TabStop = true;
+            this.OnePerFiveRadioButton.Text = "1/5";
+            this.OnePerFiveRadioButton.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
@@ -348,82 +376,10 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.splitter1.TabIndex = 42;
             this.splitter1.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(297, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 20);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "روش انتخاب";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(514, 13);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 20);
-            this.label9.TabIndex = 48;
-            this.label9.Text = "استراتژی";
-            // 
-            // SUSCheckBox
-            // 
-            this.SUSCheckBox.AutoSize = true;
-            this.SUSCheckBox.Location = new System.Drawing.Point(297, 70);
-            this.SUSCheckBox.Name = "SUSCheckBox";
-            this.SUSCheckBox.Size = new System.Drawing.Size(57, 24);
-            this.SUSCheckBox.TabIndex = 51;
-            this.SUSCheckBox.Text = "SUS";
-            this.SUSCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // RouletteWheelCheckBox
-            // 
-            this.RouletteWheelCheckBox.AutoSize = true;
-            this.RouletteWheelCheckBox.Location = new System.Drawing.Point(297, 44);
-            this.RouletteWheelCheckBox.Name = "RouletteWheelCheckBox";
-            this.RouletteWheelCheckBox.Size = new System.Drawing.Size(133, 24);
-            this.RouletteWheelCheckBox.TabIndex = 52;
-            this.RouletteWheelCheckBox.Text = "Roulette Wheel";
-            this.RouletteWheelCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SelfAdaptionCheckBox
-            // 
-            this.SelfAdaptionCheckBox.AutoSize = true;
-            this.SelfAdaptionCheckBox.Location = new System.Drawing.Point(505, 73);
-            this.SelfAdaptionCheckBox.Name = "SelfAdaptionCheckBox";
-            this.SelfAdaptionCheckBox.Size = new System.Drawing.Size(122, 24);
-            this.SelfAdaptionCheckBox.TabIndex = 53;
-            this.SelfAdaptionCheckBox.Text = "Self Adaption";
-            this.SelfAdaptionCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // OnePerFiveStrategy
-            // 
-            this.OnePerFiveStrategy.AutoSize = true;
-            this.OnePerFiveStrategy.Checked = true;
-            this.OnePerFiveStrategy.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.OnePerFiveStrategy.Location = new System.Drawing.Point(505, 44);
-            this.OnePerFiveStrategy.Name = "OnePerFiveStrategy";
-            this.OnePerFiveStrategy.Size = new System.Drawing.Size(53, 24);
-            this.OnePerFiveStrategy.TabIndex = 54;
-            this.OnePerFiveStrategy.Text = "1/5";
-            this.OnePerFiveStrategy.UseVisualStyleBackColor = true;
-            // 
-            // TournamentCheckBox
-            // 
-            this.TournamentCheckBox.AutoSize = true;
-            this.TournamentCheckBox.Checked = true;
-            this.TournamentCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TournamentCheckBox.Location = new System.Drawing.Point(297, 97);
-            this.TournamentCheckBox.Name = "TournamentCheckBox";
-            this.TournamentCheckBox.Size = new System.Drawing.Size(110, 24);
-            this.TournamentCheckBox.TabIndex = 55;
-            this.TournamentCheckBox.Text = "Tournament";
-            this.TournamentCheckBox.UseVisualStyleBackColor = true;
-            // 
             // KTournamentLabel
             // 
             this.KTournamentLabel.AutoSize = true;
-            this.KTournamentLabel.Location = new System.Drawing.Point(297, 122);
+            this.KTournamentLabel.Location = new System.Drawing.Point(18, 106);
             this.KTournamentLabel.Name = "KTournamentLabel";
             this.KTournamentLabel.Size = new System.Drawing.Size(18, 20);
             this.KTournamentLabel.TabIndex = 56;
@@ -431,7 +387,7 @@ namespace knapsackEvolutionALgorithm.Presentation
             // 
             // KTournamentCheckBox
             // 
-            this.KTournamentCheckBox.Location = new System.Drawing.Point(322, 122);
+            this.KTournamentCheckBox.Location = new System.Drawing.Point(42, 103);
             this.KTournamentCheckBox.Name = "KTournamentCheckBox";
             this.KTournamentCheckBox.Size = new System.Drawing.Size(60, 27);
             this.KTournamentCheckBox.TabIndex = 57;
@@ -472,24 +428,121 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.label11.TabIndex = 61;
             this.label11.Text = "سیگما";
             // 
+            // singleRecombinationRadioButton
+            // 
+            this.singleRecombinationRadioButton.AutoSize = true;
+            this.singleRecombinationRadioButton.Location = new System.Drawing.Point(8, 22);
+            this.singleRecombinationRadioButton.Name = "singleRecombinationRadioButton";
+            this.singleRecombinationRadioButton.Size = new System.Drawing.Size(71, 24);
+            this.singleRecombinationRadioButton.TabIndex = 69;
+            this.singleRecombinationRadioButton.Text = "Single";
+            this.singleRecombinationRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // SimpleREcombinationRadioButton
+            // 
+            this.SimpleREcombinationRadioButton.AutoSize = true;
+            this.SimpleREcombinationRadioButton.Checked = true;
+            this.SimpleREcombinationRadioButton.Location = new System.Drawing.Point(7, 49);
+            this.SimpleREcombinationRadioButton.Name = "SimpleREcombinationRadioButton";
+            this.SimpleREcombinationRadioButton.Size = new System.Drawing.Size(76, 24);
+            this.SimpleREcombinationRadioButton.TabIndex = 70;
+            this.SimpleREcombinationRadioButton.TabStop = true;
+            this.SimpleREcombinationRadioButton.Text = "Simple";
+            this.SimpleREcombinationRadioButton.UseVisualStyleBackColor = true;
+            this.SimpleREcombinationRadioButton.CheckedChanged += new System.EventHandler(this.SimpleREcombinationRadioButton_CheckedChanged);
+            // 
+            // WholeRecombinationrRdioButton
+            // 
+            this.WholeRecombinationrRdioButton.AutoSize = true;
+            this.WholeRecombinationrRdioButton.Location = new System.Drawing.Point(6, 75);
+            this.WholeRecombinationrRdioButton.Name = "WholeRecombinationrRdioButton";
+            this.WholeRecombinationrRdioButton.Size = new System.Drawing.Size(73, 24);
+            this.WholeRecombinationrRdioButton.TabIndex = 71;
+            this.WholeRecombinationrRdioButton.Text = "Whole";
+            this.WholeRecombinationrRdioButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.TournamentRadioButton);
+            this.groupBox1.Controls.Add(this.KTournamentCheckBox);
+            this.groupBox1.Controls.Add(this.KTournamentLabel);
+            this.groupBox1.Controls.Add(this.SUSRadioButton);
+            this.groupBox1.Controls.Add(this.RouletteWheelRadiButton);
+            this.groupBox1.Location = new System.Drawing.Point(224, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(161, 134);
+            this.groupBox1.TabIndex = 72;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "روش انتخاب";
+            // 
+            // TournamentRadioButton
+            // 
+            this.TournamentRadioButton.AutoSize = true;
+            this.TournamentRadioButton.Location = new System.Drawing.Point(18, 79);
+            this.TournamentRadioButton.Name = "TournamentRadioButton";
+            this.TournamentRadioButton.Size = new System.Drawing.Size(109, 24);
+            this.TournamentRadioButton.TabIndex = 78;
+            this.TournamentRadioButton.Text = "Tournament";
+            this.TournamentRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // SUSRadioButton
+            // 
+            this.SUSRadioButton.AutoSize = true;
+            this.SUSRadioButton.Checked = true;
+            this.SUSRadioButton.Location = new System.Drawing.Point(18, 51);
+            this.SUSRadioButton.Name = "SUSRadioButton";
+            this.SUSRadioButton.Size = new System.Drawing.Size(56, 24);
+            this.SUSRadioButton.TabIndex = 77;
+            this.SUSRadioButton.TabStop = true;
+            this.SUSRadioButton.Text = "SUS";
+            this.SUSRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // RouletteWheelRadiButton
+            // 
+            this.RouletteWheelRadiButton.AutoSize = true;
+            this.RouletteWheelRadiButton.Location = new System.Drawing.Point(18, 23);
+            this.RouletteWheelRadiButton.Name = "RouletteWheelRadiButton";
+            this.RouletteWheelRadiButton.Size = new System.Drawing.Size(132, 24);
+            this.RouletteWheelRadiButton.TabIndex = 76;
+            this.RouletteWheelRadiButton.Text = "Roulette Wheel";
+            this.RouletteWheelRadiButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.WholeRecombinationrRdioButton);
+            this.groupBox4.Controls.Add(this.SimpleREcombinationRadioButton);
+            this.groupBox4.Controls.Add(this.singleRecombinationRadioButton);
+            this.groupBox4.Location = new System.Drawing.Point(400, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(122, 129);
+            this.groupBox4.TabIndex = 73;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "بازترکیبی";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.SelfAdaptionRadioButton);
+            this.groupBox5.Controls.Add(this.OnePerFiveRadioButton);
+            this.groupBox5.Location = new System.Drawing.Point(533, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(125, 132);
+            this.groupBox5.TabIndex = 74;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "جهش";
+            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+            // 
             // MinimumPointFunctions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 646);
+            this.ClientSize = new System.Drawing.Size(1244, 646);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.sigmaTextBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.MinFuncChromosomeLength);
-            this.Controls.Add(this.KTournamentCheckBox);
-            this.Controls.Add(this.KTournamentLabel);
-            this.Controls.Add(this.TournamentCheckBox);
-            this.Controls.Add(this.OnePerFiveStrategy);
-            this.Controls.Add(this.SelfAdaptionCheckBox);
-            this.Controls.Add(this.RouletteWheelCheckBox);
-            this.Controls.Add(this.SUSCheckBox);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -515,6 +568,12 @@ namespace knapsackEvolutionALgorithm.Presentation
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,7 +602,6 @@ namespace knapsackEvolutionALgorithm.Presentation
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox maximumChildsTextBox;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label RouletteWheelSelection;
         private System.Windows.Forms.Label SUSSelection;
         private System.Windows.Forms.RadioButton radioButton2;
@@ -554,13 +612,7 @@ namespace knapsackEvolutionALgorithm.Presentation
         private System.Windows.Forms.TextBox bTextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox cTextBox;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox SUSCheckBox;
-        private System.Windows.Forms.CheckBox RouletteWheelCheckBox;
-        private System.Windows.Forms.CheckBox SelfAdaptionCheckBox;
-        private System.Windows.Forms.CheckBox OnePerFiveStrategy;
         private System.Windows.Forms.CheckBox TournometCheckBox;
-        private System.Windows.Forms.CheckBox TournamentCheckBox;
         private System.Windows.Forms.Label KTournamentValue;
         private System.Windows.Forms.Label KTournamentLabel;
         private System.Windows.Forms.TextBox KTournamentCheckBox;
@@ -570,5 +622,17 @@ namespace knapsackEvolutionALgorithm.Presentation
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox sigmaTextBox;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.RadioButton singleRecombinationRadioButton;
+        private System.Windows.Forms.RadioButton SimpleREcombinationRadioButton;
+        private System.Windows.Forms.RadioButton WholeRecombinationrRdioButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton TournamentRadioButton;
+        private System.Windows.Forms.RadioButton SUSRadioButton;
+        private System.Windows.Forms.RadioButton RouletteWheelRadiButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton OnePerFiveRadioButton;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton SelfAdaptionRadioButton;
     }
 }

@@ -113,13 +113,12 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Trains
                             var childUpdateFitness = _functionHandler.ProcessHandleFitness(mutationChild, gettingStarted.ChoromosemeLenght, gettingStarted.FunctionSelected).Result;
 
                             //Choose Max Child //
-                            maximumChild = (childUpdateFitness.Fitness > maximumChild.Fitness) ?
-                                childUpdateFitness : maximumChild;
 
                             if (childUpdateFitness.Fitness > maximumChild.Fitness)
                             {
                                 maximumChild = childUpdateFitness;
                                 //Invoke
+                                //MaximumChildChanged.Invoke(maximumChild, MutationOrRecombination.Mutation, j, i);
                                 MaximumChildChanged.Invoke(maximumChild, MutationOrRecombination.Mutation, j, i);
                             }
 

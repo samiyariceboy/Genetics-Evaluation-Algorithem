@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace knapsackEvolutionALgorithm.Presentation.Properties {
+namespace GeneticsEvaluationAlgorithem.Presentation.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace knapsackEvolutionALgorithm.Presentation.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("knapsackEvolutionALgorithm.Presentation.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GeneticsEvaluationAlgorithem.Presentation.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

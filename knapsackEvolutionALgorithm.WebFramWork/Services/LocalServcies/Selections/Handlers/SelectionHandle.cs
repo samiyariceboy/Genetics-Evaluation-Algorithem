@@ -17,6 +17,12 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections.H
         {
             _selectionRequestList = selectionRequestList;
         }
+
+        public Task<IList<MinFuncIndividual>> ProcessingRandomSelection(IList<MinFuncIndividual> selectionBox, int capacity, Selection selection)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<IList<MinFuncIndividual>> ProcessSelection(IList<MinFuncIndividual> seletionBox, int capacity, Selection selection)
         {
             foreach (ISelectionMethod<IList<MinFuncIndividual>, IList<MinFuncIndividual>> selectionRequest in _selectionRequestList)

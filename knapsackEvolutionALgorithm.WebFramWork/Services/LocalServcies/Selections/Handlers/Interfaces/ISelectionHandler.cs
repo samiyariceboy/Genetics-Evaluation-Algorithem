@@ -7,6 +7,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Selections.H
         where TRequest : class
         where TResult : class
     {
+        Task<TResult> ProcessingRandomSelection(TRequest selectionBox, int capacity, Selection selection);
         Task<TResult> ProcessSelection(TRequest selectionBox, int capacity, Selection selection);
     }
 }

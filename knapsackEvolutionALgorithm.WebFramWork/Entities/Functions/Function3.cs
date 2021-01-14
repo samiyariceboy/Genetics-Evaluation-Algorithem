@@ -43,7 +43,7 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
         {
             if (functionSelected == FunctionSelected.Function3)
             {
-                individual.Fitness = 10000 - individual.Fitness;
+                individual.Fitness = individual.Fitness;
                 return Task.FromResult(individual);
             }
             return Task.FromResult(new MinFuncIndividual(null));

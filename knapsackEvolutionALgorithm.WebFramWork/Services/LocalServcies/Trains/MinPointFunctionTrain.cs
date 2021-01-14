@@ -77,7 +77,7 @@ namespace knapsackEvolutionALgorithm.Service.Services.LocalServcies.Trains
                     var parent = _selectionHandler.ProcessSelection(firstPopulation, gettingStarted.NumberOfParents, gettingStarted.SelectionList).Result;
                     for (int j = 0; j < gettingStarted.NumberOfParents - 1; j++)
                     {
-                        ParentChanged.Invoke(i);
+                        ParentChanged.Invoke(j);
                         var random = RandomHelper.CreateRandom(0, 10);
                         if (random == 5)
                         {

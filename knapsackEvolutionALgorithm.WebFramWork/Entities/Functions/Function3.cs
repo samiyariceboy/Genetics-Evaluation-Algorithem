@@ -26,7 +26,7 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
                 else if (x >= -5.12 && x <= 5.12)
                     s += (Math.Pow(x, 2) - (10 * Math.Cos(2 * Math.PI * x)));
             }
-            return (10 * nCount) + s;
+            return 100000 - ( (10 * nCount) + s);
         }
         public Task<MinFuncIndividual> HandleFitness(MinFuncIndividual individual, int chromosomeLength, FunctionSelected functionSelected)
         {
@@ -43,7 +43,7 @@ namespace knapsackEvolutionALgorithm.Service.Entities.Functions
         {
             if (functionSelected == FunctionSelected.Function3)
             {
-                individual.Fitness = individual.Fitness;
+                individual.Fitness = 100000 - individual.Fitness;
                 return Task.FromResult(individual);
             }
             return Task.FromResult(new MinFuncIndividual(null));
